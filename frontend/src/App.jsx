@@ -1,13 +1,17 @@
 import { Route, Routes } from "react-router";
 import NavBar from "./components/NavBar";
-import HomePage from "./pages/HomePage";
+// import HomePage from "./pages/HomePage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   return (
     <main>
       <NavBar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/" element={<HomePage />} /> */}
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </main>
   );
