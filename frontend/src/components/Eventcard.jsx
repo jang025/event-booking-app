@@ -47,14 +47,14 @@ export default function Eventcard({ event }) {
             alt={short_title}
             style={{
               width: "100%",
-              height: "auto",
+              height: "130px",
               borderRadius: "8px",
               objectFit: "cover",
               display: "block",
             }}
           />
         </div>
-        <div>
+        <div style={{ flex: 1, width: "100%" }}>
           <h2 style={{ margin: 3 }}>{short_title}</h2>
           <p style={{ margin: 3 }}>{formatted}</p>
           <p style={{ margin: 3 }}>{venue}</p>
@@ -62,7 +62,9 @@ export default function Eventcard({ event }) {
             style={{
               display: "flex",
               justifyContent: "space-between",
+              alignItems: "baseline",
               margin: 0,
+              flexDirection: "row",
             }}
           >
             <p style={{ margin: 3 }}>from ${lowestPrice}</p>
