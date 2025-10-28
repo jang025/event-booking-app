@@ -1,8 +1,16 @@
 import React from "react";
 import { sampleEvents } from "../data/sampleEvents.js";
 import Eventcard from "../components/Eventcard.jsx";
+import { useState, useEffect } from "react";
 
 export default function EventListPage() {
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/api/events")
+      .then((res) => res.json())
+      .then((data) => setEvents(data));
+  }, []);
+
   return (
     <div>
       {/* search bar */}
@@ -60,7 +68,7 @@ export default function EventListPage() {
           alignContent: "center",
         }}
       >
-        {sampleEvents.map((event, i) => (
+        {events.map((event, i) => (
           <Eventcard key={i} event={event} />
         ))}
       </div>

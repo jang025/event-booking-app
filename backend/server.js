@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const logger = require("morgan");
 const authController = require("./controllers/authController");
+const eventController = require("./controllers/eventController");
 
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.set("debug", true);
@@ -19,6 +20,7 @@ app.use(logger("dev"));
 
 // Routes go here
 app.use("/api/auth", authController);
+app.use("/api/events", eventController);
 
 app.listen(3000, () => {
   console.log("The express app is ready!");
