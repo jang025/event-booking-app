@@ -1,8 +1,9 @@
 import React from "react";
-import { sampleEvents } from "../data/sampleEvents.js";
+import { useState, useEffect } from "react";
+// import { sampleEvents } from "../data/sampleEvents.js";
 
 export default function Eventcard({ event }) {
-  //function receives event object, stores it in a variable named event
+  // function receives event object, stores it in a variable named event
 
   const {
     short_title,
@@ -15,7 +16,7 @@ export default function Eventcard({ event }) {
     status,
   } = event;
 
-  //formats date to be shown on card to Sat, Nov 1, 9 AM
+  // formats date to be shown on card to Sat, Nov 1, 9 AM
   const formatted = new Date(start_time).toLocaleString("en-US", {
     weekday: "short",
     month: "short",

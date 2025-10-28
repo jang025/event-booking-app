@@ -24,5 +24,5 @@ app.use("/api/auth", authController);
 app.use("/api", eventController);
 
 app.listen(3000, () => {
-  console.log("The express app is ready!");
+  console.log("The express app is ready on port 3000!");
 });

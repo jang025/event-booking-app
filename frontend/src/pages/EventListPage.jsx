@@ -1,14 +1,17 @@
 import React from "react";
-import { sampleEvents } from "../data/sampleEvents.js";
+// import { sampleEvents } from "../data/sampleEvents.js";
 import Eventcard from "../components/Eventcard.jsx";
 import { useState, useEffect } from "react";
 
 export default function EventListPage() {
   const [events, setEvents] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:3000/api/events")
       .then((res) => res.json())
-      .then((data) => setEvents(data));
+      .then((data) => setEvents(data))
+      .catch((err) => console.error("Error fetching events:", err));
+    console.log("data has been fetched:", events);
   }, []);
 
   return (
@@ -68,8 +71,8 @@ export default function EventListPage() {
           alignContent: "center",
         }}
       >
-        {events.map((event, i) => (
-          <Eventcard key={i} event={event} />
+        {events.map((event) => (
+          <Eventcard key={event._id} event={event} />
         ))}
       </div>
     </div>
