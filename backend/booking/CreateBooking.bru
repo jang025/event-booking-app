@@ -1,0 +1,29 @@
+meta {
+  name: CreateBooking
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/book
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "userId": "68ff71f2254ba4d090ac5dcb",
+    "eventId": "68ff71f2254ba4d090ac5dc2",
+    "items": [
+      {
+        "tierName": "VIP",
+        "unitPrice": 400,
+        "quantity": 2,
+        "totalCost": 800,
+        "_id": "68ff71f2254ba4d090ac5dcf"
+      }
+    ],
+    "status": "confirmed",
+    "booking_date": "2025-10-23T01:00:00.000Z"
+  }
+}
