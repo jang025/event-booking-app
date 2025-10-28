@@ -99,7 +99,7 @@ const createEventsAndBookings = async () => {
   // --- Sample Booking Data ---
   const bookings = [
     {
-      userId: new mongoose.Types.ObjectId(), // replace with actual userId if available
+      userId: new mongoose.Types.ObjectId(), 
       eventId: createdEvents[0]._id,
       items: [{ tierName: "VIP", unitPrice: 400, quantity: 2, totalCost: 800 }],
       status: "confirmed",
