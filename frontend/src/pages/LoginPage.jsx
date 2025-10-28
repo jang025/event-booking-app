@@ -1,11 +1,12 @@
 import { useState } from "react";
 import AuthForm from "../components/AuthForm";
+const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 function LoginPage() {
   const [formData, setFormData] = useState({
-    username: "simon",
-    password: "321",
-    email: "simon111@hotmail.com",
+    username: "",
+    password: "",
+    email: "",
   });
 
   const handleChange = (event) => {
@@ -16,20 +17,19 @@ function LoginPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const url = `${baseUrl}/api/auth/login`;
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
-      console.log(data);
-
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
-
-      console.log("Login successful, backend response:", data);
+      console.log(data);
+      return data;
     } catch (error) {
       console.error(error);
     }
