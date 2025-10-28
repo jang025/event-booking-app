@@ -26,12 +26,19 @@ const createUsers = async () => {
   // const saltRounds = 6;
   const users = [
     {
-      username: "simon",
-      password: "321",
+      username: "jeremy",
+      password: "password123",
+      email: "jeremy@example.com",
     },
     {
-      username: "kristie",
-      password: "123",
+      username: "june",
+      password: "password456",
+      email: "ethan@example.com",
+    },
+    {
+      username: "poorani",
+      password: "poorani789",
+      email: "poorani@example.com",
     },
   ];
   // await User.deleteMany();
