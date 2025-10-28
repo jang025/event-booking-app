@@ -9,7 +9,7 @@ import { sampleEvents } from "./data/sampleEvents.js";
 const App = () => {
   return (
     <main>
-      <Eventcard event={sampleEvents} />
+      <Eventcard event={sampleEvents[0]} />
       {/* <NavBar /> */}
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}

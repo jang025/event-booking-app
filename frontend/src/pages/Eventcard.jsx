@@ -25,6 +25,9 @@ export default function Eventcard({ event }) {
     hour12: true,
   });
 
+  //to show the lowest price tier if tiers exist
+  const lowestPrice = tiers && tiers.length > 0 ? tiers[0].price : null;
+
   return (
     <>
       <div
@@ -52,9 +55,9 @@ export default function Eventcard({ event }) {
           />
         </div>
         <div>
-          <h2 style={{ margin: 0 }}>{short_title}</h2>
-          <p style={{ margin: 0 }}>{formatted}</p>
-          <p style={{ margin: 0 }}>{venue}</p>
+          <h2 style={{ margin: 3 }}>{short_title}</h2>
+          <p style={{ margin: 3 }}>{formatted}</p>
+          <p style={{ margin: 3 }}>{venue}</p>
           <div
             style={{
               display: "flex",
@@ -62,8 +65,8 @@ export default function Eventcard({ event }) {
               margin: 0,
             }}
           >
-            <p style={{ margin: 0 }}>price</p>
-            <p style={{ margin: 0 }}>{status}</p>
+            <p style={{ margin: 3 }}>from ${lowestPrice}</p>
+            <p style={{ margin: 3 }}>{status}</p>
           </div>
         </div>
       </div>

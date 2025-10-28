@@ -5,17 +5,19 @@ export const sampleEvents = [
     event_id: "E1001",
     short_title: "Tech Meetup SG",
     long_title: "Tech Meetup Singapore 2025",
-    event_image: "/images/tech-meetup.jpg",
+    event_image: "/images/tech-meetup.png",
     category: "Technology",
     start_time: "2025-11-01T09:00:00Z",
     end_time: "2025-11-01T18:00:00Z",
     venue: "Suntec Singapore Convention & Exhibition Centre",
     organiser_name: "Tech Network",
-    organiser_description: "A community of developers and innovators in Southeast Asia.",
+    organiser_description:
+      "A community of developers and innovators in Southeast Asia.",
     organiser_contact_name: "Jane Doe",
     organiser_email: "jane@technetwork.com",
     organiser_image: "/images/jane.jpg",
-    event_short_description: "Join Singapore’s biggest tech networking event of the year.",
+    event_short_description:
+      "Join Singapore’s biggest tech networking event of the year.",
     event_long_description:
       "Tech Meetup Singapore brings together founders, engineers, and investors to discuss the latest in AI, startups, and emerging tech trends. Expect panels, networking sessions, and startup showcases.",
     address: "1 Raffles Blvd, Singapore 039593",
@@ -61,7 +63,8 @@ export const sampleEvents = [
     end_time: "2025-12-15T21:00:00Z",
     venue: "BLOCK71 Singapore",
     organiser_name: "Startup SG",
-    organiser_description: "Empowering local entrepreneurs through community events.",
+    organiser_description:
+      "Empowering local entrepreneurs through community events.",
     organiser_contact_name: "Lisa Tan",
     organiser_email: "lisa@startupsg.gov",
     organiser_image: "/images/lisa.jpg",
