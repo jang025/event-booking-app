@@ -21,6 +21,7 @@ app.use(logger("dev"));
 
 // Routes go here
 app.use("/api/auth", authController);
+app.use("/api", eventController);
 
 app.listen(3000, () => {
   console.log("The express app is ready!");

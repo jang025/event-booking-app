@@ -1,0 +1,39 @@
+meta {
+  name: post events
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/eventlist
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "short_title": "Tech Meetup SG",
+    "long_title": "Tech Meetup Singapore 2025",
+    "event_image": "/images/tech-meetup.png",
+    "category": "Business & Networking",
+    "start_date_time": "2025-11-01T09:00:00Z",
+    "end_date_time": "2025-11-01T18:00:00Z",
+    "venue": "Suntec Singapore Convention & Exhibition Centre",
+    "address": "1 Raffles Blvd, Singapore 039593",
+    "organisation": {
+      "name": "Tech Network",
+      "description": "A community of developers and innovators in Southeast Asia.",
+      "contact_person_name": "Jane Doe",
+      "contact_person_email": "jane@technetwork.com",
+      "image": "/images/jane.jpg"
+    },
+    "event_short_description": "Join Singapore’s biggest tech networking event of the year.",
+    "event_long_description": "Tech Meetup Singapore brings together founders, engineers, and investors to discuss the latest in AI, startups, and emerging tech trends.",
+    "tiers": [
+      { "tierName": "General", "unitPrice": 100, "capacity": 200 },
+      { "tierName": "VIP", "unitPrice": 250, "capacity": 50 }
+    ],
+    "status": "ongoing"
+  }
+  
+}
