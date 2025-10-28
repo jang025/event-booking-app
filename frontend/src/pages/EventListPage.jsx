@@ -34,6 +34,22 @@ export default function EventListPage() {
           🔍{" "}
         </button>
       </div>
+
+      {/* filter buttons */}
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          marginBottom: "10px",
+          height: "38px",
+        }}
+      >
+        <button style={{ padding: "0 20px 0 20px" }}>Category ⌄</button>
+        <button style={{ padding: "0 20px 0 20px" }}>
+          Sort by: earliest first
+        </button>
+      </div>
+
       {/* list of events container */}
       <div
         style={{
@@ -41,6 +57,7 @@ export default function EventListPage() {
           flexDirection: "column",
           height: "160px",
           gap: "15px",
+          alignContent: "center",
         }}
       >
         {sampleEvents.map((event, i) => (
