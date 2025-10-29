@@ -9,15 +9,15 @@ export default function Eventcard({ event }) {
     short_title,
     long_title,
     event_image,
-    start_time,
-    end_time,
+    start_date_time,
+    end_date_time,
     venue,
     tiers,
     status,
   } = event;
 
   // formats date to be shown on card to Sat, Nov 1, 9 AM
-  const formatted = new Date(start_time).toLocaleString("en-US", {
+  const formatted = new Date(start_date_time).toLocaleString("en-US", {
     weekday: "short",
     month: "short",
     day: "numeric",
@@ -27,7 +27,20 @@ export default function Eventcard({ event }) {
   });
 
   //to show the lowest price tier if tiers exist
-  const lowestPrice = tiers && tiers.length > 0 ? tiers[0].price : null;
+  // const lowestPrice =
+  //   tiers && tiers.length > 0 //ensures that tiers exist
+  //     ? Math.min(...tiers.map((tier) => tier.unitPrice)) === 0
+  //       ? "FREE" //Math.min()takes the lowest number, doesnt work on arrays
+  //       : Math.min(...tiers.map((tier) => tier.unitPrice))
+  //     : "FREE"; //otherwise make it null
+
+  //showing the lowest price in the card
+  let lowestPrice = "FREE";
+
+  if (tiers && tiers.length > 0) {
+    const minPrice = Math.min(...tiers.map((tier) => tier.unitPrice));
+    lowestPrice = minPrice === 0 ? "FREE" : `from $${minPrice}`;
+  }
 
   return (
     <>
@@ -56,7 +69,7 @@ export default function Eventcard({ event }) {
           />
         </div>
         <div style={{ flex: 1, width: "100%" }}>
-          <h2 style={{ margin: 3 }}>{short_title}</h2>
+          <h2 style={{ margin: 3 }}>{long_title}</h2>
           <p style={{ margin: 3 }}>{formatted}</p>
           <p style={{ margin: 3 }}>{venue}</p>
           <div
@@ -68,7 +81,7 @@ export default function Eventcard({ event }) {
               flexDirection: "row",
             }}
           >
-            <p style={{ margin: 3 }}>from ${lowestPrice}</p>
+            <p style={{ margin: 3 }}>{lowestPrice}</p>
             <p style={{ margin: 3 }}>{status}</p>
           </div>
         </div>
