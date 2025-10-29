@@ -30,7 +30,6 @@ const create = async (req, res) => {
       username,
       password: hashedPassword,
       email,
-      bookings: [],
     });
     res.status(201).json(newUser);
   } catch (error) {

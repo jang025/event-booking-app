@@ -28,12 +28,6 @@ const userSchema = new Schema(
         message: "Please enter a valid email address",
       },
     },
-    bookings: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Booking",
-      },
-    ],
   },
 
   {
