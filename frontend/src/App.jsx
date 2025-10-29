@@ -10,6 +10,7 @@ import ConfirmationPage from "./pages/ConfirmationPage";
 import EventListPage from "./pages/EventListPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import EditProfilePage from "./pages/EditProfilePage.jsx";
+import EventDetailsPage from "./pages/EventDetailsPage.jsx";
 
 const App = () => {
   // const [token, setToken] = useState(null);
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/users/:userId" element={<ProfilePage />} />
         <Route path="/users/:userId/edit" element={<EditProfilePage />} />
+        <Route path="/users/:eventId" element={<EventDetailsPage />} />
       </Routes>
     </main>
   );

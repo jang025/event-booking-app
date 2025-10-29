@@ -7,6 +7,7 @@ export default function EventListPage() {
   const [events, setEvents] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [filteredEvents, setFilteredEvents] = useState(events || []);
+  const [selectedSort, setSelectedSort] = useState("date");
 
   //categories for filter function
   let categories = [
@@ -39,6 +40,10 @@ export default function EventListPage() {
       setFilteredEvents(filtered);
     }
   }, [selectedFilter, events]);
+
+  function handleSortChange(value) {
+    setSelectedSort(value);
+  }
 
   const handleFilterButtonClick = (selectedCategory) => {
     setSelectedFilter(selectedCategory);
@@ -77,29 +82,44 @@ export default function EventListPage() {
         </button>
       </div>
 
-      <div>
-        <p>showing categories:</p>
-        <div
-          className="filter-buttons-container"
-          style={{
-            display: "flex",
-            gap: "10px",
-            height: "38px",
-            padding: "0 0 30px 0",
-          }}
-        >
-          {categories.map((cat, i) => (
-            <button
-              onClick={() => handleFilterButtonClick(cat)}
-              key={i}
-              style={{
-                backgroundColor: selectedFilter === cat ? "black" : "white",
-                color: selectedFilter === cat ? "white" : "black",
-              }}
-            >
-              {cat}
-            </button>
-          ))}
+      {/* sort buttons */}
+      <div style={{ display: "flex" }}>
+        {/* multifilter buttons  */}
+        <div>
+          <p>showing categories:</p>
+          <div
+            className="filter-buttons-container"
+            style={{
+              display: "flex",
+              gap: "10px",
+              height: "38px",
+              padding: "0 0 30px 0",
+            }}
+          >
+            {categories.map((cat, i) => (
+              <button
+                onClick={() => handleFilterButtonClick(cat)}
+                key={i}
+                style={{
+                  backgroundColor: selectedFilter === cat ? "black" : "white",
+                  color: selectedFilter === cat ? "white" : "black",
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+
+            <div>
+              <label>Sort by: </label>
+              <select onChange={(e) => handleSortChange(e.target.value)}>
+                {" "}
+                <option>Date</option>
+                <option>Price: Low → High</option>
+                <option>Price: High → Low</option>
+              </select>
+            </div>
+          </div>
+          {/* sort by dropdown  */}
         </div>
       </div>
 
