@@ -2,6 +2,7 @@ import React from "react";
 // import { sampleEvents } from "../data/sampleEvents.js";
 import Eventcard from "../components/Eventcard.jsx";
 import { useState, useEffect } from "react";
+import MultiFilters from "../components/MultiFilters.jsx";
 
 export default function EventListPage() {
   const [events, setEvents] = useState([]);
@@ -46,7 +47,11 @@ export default function EventListPage() {
         </button>
       </div>
 
-      {/* filter buttons */}
+      <div>
+        <MultiFilters />
+      </div>
+
+      {/* filter buttons
       <div
         style={{
           display: "flex",
@@ -55,11 +60,11 @@ export default function EventListPage() {
           height: "38px",
         }}
       >
-        <button style={{ padding: "0 20px 0 20px" }}>Category ⌄</button>
+        <button style={{ padding: "0 20px 0 20px" }}>Category</button>
         <button style={{ padding: "0 20px 0 20px" }}>
           Sort by: earliest first
         </button>
-      </div>
+      </div> */}
 
       {/* list of events container */}
       <div
