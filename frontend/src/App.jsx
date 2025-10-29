@@ -17,6 +17,7 @@ const App = () => {
   // const [available, setAvailable] = useState(true)
   // const [ongoing, setOngoing] = useState(true)
 
+<<<<<<< HEAD
   if (token === null) {
     return (
       <main>
@@ -30,6 +31,8 @@ const App = () => {
       </main>
     );
   }
+=======
+>>>>>>> 44e61f199410a3395b22a8d9a9b121bca03bba4b
   return (
     <main>
       {/* <NavBar /> */}
