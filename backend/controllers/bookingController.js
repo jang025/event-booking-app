@@ -67,8 +67,6 @@ const remove = async (req, res) => {
       return res.status(404).json({ msg: "Booking not found" });
     }
 
-<<<<<<< HEAD
-=======
     // Remove booking ID from user's "bookings" array
     await User.findByIdAndUpdate(deleted.userId, {
       $pull: { bookings: deleted._id },
@@ -86,7 +84,6 @@ const remove = async (req, res) => {
       await event.save();
     }
 
->>>>>>> jeremy
     res.status(200).json({
       msg: "Booking Cancelled successfully",
       bookingId: Cancelled._id,
