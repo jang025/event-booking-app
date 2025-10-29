@@ -22,7 +22,22 @@ const create = async (req, res) => {
   }
 };
 
+const showevent = async (req, res) => {
+  const { eventId } = req.params;
+  try {
+    const events = await Event.findById(eventId);
+    if (!events) {
+      return res.status(404).json({ msg: "No event found" });
+    }
+    return res.status(200).json(events);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error fetching event" });
+  }
+};
+
 router.get("/eventlist", show);
 router.post("/eventlist", create);
+router.get("/:eventId", showevent);
 
 module.exports = router;
