@@ -2,8 +2,13 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 export default function MultiFilters() {
-  // const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("All");
   // const [filteredItems, setFilteredItems] = useState(items);
+
+  const handleFilterButtonClick = (selectedCategory) => {
+    setSelectedFilter(selectedCategory);
+    console.log("selected category:", selectedCategory);
+  };
 
   let category = [
     "All",
@@ -14,6 +19,7 @@ export default function MultiFilters() {
     "Health",
     "Community",
   ];
+
   return (
     <div>
       <p>showing categories:</p>
@@ -27,7 +33,16 @@ export default function MultiFilters() {
         }}
       >
         {category.map((cat, i) => (
-          <button key={i}>{cat}</button>
+          <button
+            onClick={() => handleFilterButtonClick(cat)}
+            key={i}
+            style={{
+              backgroundColor: selectedFilter === cat ? "black" : "white",
+              color: selectedFilter === cat ? "white" : "black",
+            }}
+          >
+            {cat}
+          </button>
         ))}
       </div>
     </div>
