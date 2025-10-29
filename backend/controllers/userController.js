@@ -1,4 +1,3 @@
-const { remove } = require("./bookingController");
 const { isLoggedIn } = require("../middleware/isLoggedIn");
 const express = require("express");
 const User = require("../models/User");
@@ -44,7 +43,46 @@ const showProfile = async (req, res) => {
 const updateProfile = async (req, res) => {};
 
 //! delete booking
-const deleteBooking = remove;
+const deleteBooking = async (req, res) => {
+  const { bookingId } = req.params;
+
+  try {
+    // cancel the booking
+    const cancelled = await Booking.findByIdAndUpdate(
+      bookingId,
+      { status: "cancelled" },
+      { new: true }
+    );
+    if (!cancelled) {
+      return res.status(404).json({ msg: "Booking not found" });
+    }
+
+    // Remove booking ID from user ID
+    await User.findByIdAndUpdate(cancelled.userId, {
+      $pull: { bookings: cancelled._id },
+    });
+
+    // Restore event tier capacities
+    const event = await Event.findById(cancelled.eventId);
+    if (event) {
+      cancelled.items.forEach((item) => {
+        const tier = event.tiers.find((t) => t.tierName === item.tierName);
+        if (tier) {
+          tier.capacity += item.quantity; // restore capacity
+        }
+      });
+      await event.save();
+    }
+
+    res.status(200).json({
+      msg: "Booking Cancelled successfully",
+      bookingId: cancelled._id,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error Cancelling booking" });
+  }
+};
 
 router.get("/:userId", isLoggedIn, showProfile);
 router.put("/:userId/edit", isLoggedIn, updateProfile);

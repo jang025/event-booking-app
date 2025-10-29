@@ -54,47 +54,6 @@ const create = async (req, res) => {
   }
 };
 
-// Delete a booking
-const remove = async (req, res) => {
-  const { bookingId } = req.params;
-
-  try {
-    const Cancelled = await Booking.findByIdAndUpdate(
-      bookingId,
-      { status: "cancelled" },
-      { new: true }
-    );
-    if (!Cancelled) {
-      return res.status(404).json({ msg: "Booking not found" });
-    }
-
-    // Remove booking ID from user's "bookings" array
-    await User.findByIdAndUpdate(deleted.userId, {
-      $pull: { bookings: deleted._id },
-    });
-
-    // Restore event tier capacities
-    const event = await Event.findById(deleted.eventId);
-    if (event) {
-      deleted.items.forEach((item) => {
-        const tier = event.tiers.find((t) => t.tierName === item.tierName);
-        if (tier) {
-          tier.capacity += item.quantity; // restore capacity
-        }
-      });
-      await event.save();
-    }
-
-    res.status(200).json({
-      msg: "Booking Cancelled successfully",
-      bookingId: Cancelled._id,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error deleting booking" });
-  }
-};
-
 const showevent = async (req, res) => {
   const { eventId } = req.params;
   try {
@@ -112,7 +71,6 @@ const showevent = async (req, res) => {
 // Routes
 router.post("/", create);
 router.get("/:bookingId", show);
-router.delete("/:bookingId", remove);
 router.get("/event/:eventId", showevent);
 
-module.exports = { router, show, create, remove };
+module.exports = router;
