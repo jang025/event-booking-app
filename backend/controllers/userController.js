@@ -3,6 +3,8 @@ const express = require("express");
 const User = require("../models/User");
 const Booking = require("../models/Booking");
 const router = express.Router();
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 //! show profile (with booking)
 const showProfile = async (req, res) => {
@@ -40,7 +42,38 @@ const showProfile = async (req, res) => {
 };
 
 //! update profile
-const updateProfile = async (req, res) => {};
+const updateProfile = async (req, res) => {
+  const { userId } = req.params;
+  const { username, password } = req.body;
+  //get the authenticated user
+  const currentUser = req.user;
+
+  try {
+    // currentUser._id is a Mongoose ObjectId
+    if (userId !== String(currentUser._id)) {
+      res.status(403).json({ msg: "Not authorised to update profile" });
+      return;
+    }
+
+    // new username and password
+    const updates = {};
+    if (username) updates.username = username;
+    if (password) {
+      // hash the password
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      updates.password = hashedPassword;
+    }
+
+    // update user with new username and password
+    const user = await User.findByIdAndUpdate(userId, updates, {
+      new: true,
+    });
+    res.status(200).json({ msg: "Profile updated successfully", user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Error updating profile" });
+  }
+};
 
 //! delete booking
 const deleteBooking = async (req, res) => {
@@ -57,7 +90,7 @@ const deleteBooking = async (req, res) => {
       return res.status(404).json({ msg: "Booking not found" });
     }
 
-    // Remove booking ID from user ID
+    // Remove booking ID
     await User.findByIdAndUpdate(cancelled.userId, {
       $pull: { bookings: cancelled._id },
     });
