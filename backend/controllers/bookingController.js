@@ -36,27 +36,6 @@ const create = async (req, res) => {
   }
 };
 
-// Delete a booking
-const remove = async (req, res) => {
-  const { bookingId } = req.params;
-
-  try {
-    const Cancelled = await Booking.findByIdAndUpdate(bookingId, { status: "cancelled" }, { new: true });
-    if (!Cancelled) {
-      return res.status(404).json({ msg: "Booking not found" });
-    }
-
-    res.status(200).json({
-      msg: "Booking Cancelled successfully",
-      bookingId: Cancelled._id,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error deleting booking" });
-  }
-};
-
-
 const showevent = async (req, res) => {
     const { eventId } = req.params;
     try {
@@ -74,7 +53,6 @@ const showevent = async (req, res) => {
 // Routes
 router.post("/", create);
 router.get("/:bookingId", show);
-router.delete("/:bookingId", remove);
 router.get("/event/:eventId", showevent);
 
 module.exports = router;
