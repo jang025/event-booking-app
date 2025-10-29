@@ -1,0 +1,15 @@
+meta {
+  name: show event
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3000/api/:eventId
+  body: none
+  auth: none
+}
+
+params:path {
+  eventId: 68ff71f2254ba4d090ac5dc2
+}

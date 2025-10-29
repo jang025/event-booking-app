@@ -11,27 +11,30 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import EditProfilePage from "./pages/EditProfilePage.jsx";
 import EventDetailsPage from "./pages/EventDetailsPage.jsx";
 import { useState } from "react";
-// import { useState } from "react";
 
 const App = () => {
   const [token, setToken] = useState(null);
-  // const [available, setAvailable] = useState(true)
-  // const [ongoing, setOngoing] = useState(true)
+  // const [available, setAvailable] = useState(true);
+  // const [ongoing, setOngoing] = useState(true);
+  const [eventId, setEventId] = useState("");
 
   if (token === null) {
     return (
       <main>
-        {/* <Navbar /> */}
+        {/* <NavBar /> */}
         <Routes>
           {/* <Route path="/" element={<HomePage />} /> */}
-          <Route path="/eventlist" element={<EventListPage />} />
+          <Route
+            path="/eventlist"
+            element={<EventListPage setEventId={setEventId} />}
+          />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage setToken={setToken} />} />
+          <Route path="/event/:eventId" element={<EventDetailsPage />} />
         </Routes>
       </main>
     );
   }
-  // const [eventId, setEventId] = useState("68ff71f2254ba4d090ac5dc2");
 
   return (
     <main>
@@ -44,7 +47,6 @@ const App = () => {
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/users/:userId" element={<ProfilePage />} />
         <Route path="/users/:userId/edit" element={<EditProfilePage />} />
-        <Route path="/users/:eventId" element={<EventDetailsPage />} />
       </Routes>
     </main>
   );
