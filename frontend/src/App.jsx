@@ -15,6 +15,7 @@ const App = () => {
   // const [token, setToken] = useState(null);
   // const [available, setAvailable] = useState(true)
   // const [ongoing, setOngoing] = useState(true)
+
   return (
     <main>
       {/* <NavBar /> */}
