@@ -39,9 +39,7 @@ const create = async (req, res) => {
     const event = await Event.findById(eventId);
     if (event) {
       items.forEach((item) => {
-        const tier = event.tiers.find(
-          (t) => t.tierName === item.tierName
-        );
+        const tier = event.tiers.find((t) => t.tierName === item.tierName);
         if (tier) {
           tier.capacity -= item.quantity;
         }
@@ -76,9 +74,7 @@ const remove = async (req, res) => {
     const event = await Event.findById(deleted.eventId);
     if (event) {
       deleted.items.forEach((item) => {
-        const tier = event.tiers.find(
-          (t) => t.tierName === item.tierName
-        );
+        const tier = event.tiers.find((t) => t.tierName === item.tierName);
         if (tier) {
           tier.capacity += item.quantity; // restore capacity
         }
@@ -101,4 +97,4 @@ router.post("/book", create);
 router.get("/book/:bookingId", show);
 router.delete("/book/:bookingId", remove);
 
-module.exports = router;
+module.exports = { router, show, create, remove };

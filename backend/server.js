@@ -8,6 +8,7 @@ const logger = require("morgan");
 const authController = require("./controllers/authController");
 const eventController = require("./controllers/eventController");
 const bookingController = require("./controllers/bookingController");
+const userController = require("./controllers/userController");
 
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.set("debug", true);
@@ -22,6 +23,7 @@ app.use(logger("dev"));
 // Routes go here
 app.use("/api/auth", authController);
 app.use("/api", eventController);
+app.use("/users", userController);
 
 app.listen(3000, () => {
   console.log("The express app is ready on port 3000!");
