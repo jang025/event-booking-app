@@ -31,6 +31,8 @@ const App = () => {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage setToken={setToken} />} />
           <Route path="/event/:eventId" element={<EventDetailsPage />} />
+          <Route path="/book" element={<BookTicketPage />} />
+        <Route path="/book/:bookingId" element={<ConfirmationPage />} />
         </Routes>
       </main>
     );
@@ -45,6 +47,9 @@ const App = () => {
         <Route path="/book" element={<BookTicketPage />} />
         <Route path="/eventlist" element={<EventListPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
+        {/* <Route path="/book" element={<BookTicketPage />}>
+          <Route path=":bookingId" element={<ConfirmationPage />} />
+        </Route> */}
         <Route path="/users/:userId" element={<ProfilePage />} />
         <Route path="/users/:userId/edit" element={<EditProfilePage />} />
       </Routes>
