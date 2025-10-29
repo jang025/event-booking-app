@@ -29,8 +29,6 @@ const create = async (req, res) => {
       status,
       booking_date,
     });
-<<<<<<< HEAD
-=======
 
     // Add booking ID to the user's "bookings" array
     await User.findByIdAndUpdate(userId, {
@@ -49,7 +47,6 @@ const create = async (req, res) => {
       await event.save();
     }
 
->>>>>>> jeremy
     res.status(201).json(newBooking);
   } catch (error) {
     console.error(error);
@@ -62,7 +59,11 @@ const remove = async (req, res) => {
   const { bookingId } = req.params;
 
   try {
-    const Cancelled = await Booking.findByIdAndUpdate(bookingId, { status: "cancelled" }, { new: true });
+    const Cancelled = await Booking.findByIdAndUpdate(
+      bookingId,
+      { status: "cancelled" },
+      { new: true }
+    );
     if (!Cancelled) {
       return res.status(404).json({ msg: "Booking not found" });
     }
@@ -94,20 +95,19 @@ const remove = async (req, res) => {
   }
 };
 
-
 const showevent = async (req, res) => {
-    const { eventId } = req.params;
-    try {
-      const events = await Event.findById(eventId);
-      if (!events) {
-        return res.status(404).json({ msg: "No event found" });
-      }
-      return res.status(200).json(events);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Error fetching event" });
+  const { eventId } = req.params;
+  try {
+    const events = await Event.findById(eventId);
+    if (!events) {
+      return res.status(404).json({ msg: "No event found" });
     }
+    return res.status(200).json(events);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error fetching event" });
   }
+};
 
 // Routes
 router.post("/", create);
