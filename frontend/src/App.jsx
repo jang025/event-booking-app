@@ -9,6 +9,7 @@ import ConfirmationPage from "./pages/ConfirmationPage";
 import EventListPage from "./pages/EventListPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import EditProfilePage from "./pages/EditProfilePage.jsx";
+import EventDetailsPage from "./pages/EventDetailsPage.jsx";
 import { useState } from "react";
 // import { useState } from "react";
 
@@ -30,19 +31,20 @@ const App = () => {
       </main>
     );
   }
-    // const [eventId, setEventId] = useState("68ff71f2254ba4d090ac5dc2");
- 
+  // const [eventId, setEventId] = useState("68ff71f2254ba4d090ac5dc2");
+
   return (
     <main>
       {/* <NavBar /> */}
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/book" element={<BookTicketPage/>} />
+        <Route path="/book" element={<BookTicketPage />} />
         <Route path="/eventlist" element={<EventListPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/users/:userId" element={<ProfilePage />} />
         <Route path="/users/:userId/edit" element={<EditProfilePage />} />
+        <Route path="/users/:eventId" element={<EventDetailsPage />} />
       </Routes>
     </main>
   );
