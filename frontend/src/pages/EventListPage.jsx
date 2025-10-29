@@ -26,8 +26,7 @@ export default function EventListPage({ setEventId }) {
       .then((res) => res.json())
       .then((data) => setEvents(data))
       .catch((err) => console.error("Error fetching events:", err));
-    console.log("data has been fetched:", events);
-  });
+  }, []);
 
   //when selectedFilter or items change, reassess what to show
   useEffect(() => {

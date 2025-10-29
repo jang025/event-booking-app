@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 // import { sampleEvents } from "../data/sampleEvents.js";
 
 export default function Eventcard({ event, setEventId }) {
@@ -15,7 +14,6 @@ export default function Eventcard({ event, setEventId }) {
     tiers,
     status,
   } = event;
-  setEventId(_id);
   // formats date to be shown on card to Sat, Nov 1, 9 AM
   const formatted = new Date(start_date_time).toLocaleString("en-US", {
     weekday: "short",
