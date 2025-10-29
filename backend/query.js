@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const Event = require("./models/event");
-const Booking = require("./models/booking");
+const Event = require("./models/Event");
+const Booking = require("./models/Booking");
 
 const connect = async () => {
   await mongoose.connect(process.env.MONGODB_URI);

@@ -29,26 +29,6 @@ const create = async (req, res) => {
       status,
       booking_date,
     });
-
-    // Add booking ID to the user's "bookings" array
-    await User.findByIdAndUpdate(userId, {
-      $push: { bookings: newBooking._id },
-    });
-
-    // Reduce the capacity of event tiers
-    const event = await Event.findById(eventId);
-    if (event) {
-      items.forEach((item) => {
-        const tier = event.tiers.find(
-          (t) => t.tierName === item.tierName
-        );
-        if (tier) {
-          tier.capacity -= item.quantity;
-        }
-      });
-      await event.save();
-    }
-
     res.status(201).json(newBooking);
   } catch (error) {
     console.error(error);
@@ -61,34 +41,14 @@ const remove = async (req, res) => {
   const { bookingId } = req.params;
 
   try {
-    // Delete the booking and retrieve its data
-    const deleted = await Booking.findByIdAndDelete(bookingId);
-    if (!deleted) {
+    const Cancelled = await Booking.findByIdAndUpdate(bookingId, { status: "cancelled" }, { new: true });
+    if (!Cancelled) {
       return res.status(404).json({ msg: "Booking not found" });
     }
 
-    // Remove booking ID from user's "bookings" array
-    await User.findByIdAndUpdate(deleted.userId, {
-      $pull: { bookings: deleted._id },
-    });
-
-    // Restore event tier capacities
-    const event = await Event.findById(deleted.eventId);
-    if (event) {
-      deleted.items.forEach((item) => {
-        const tier = event.tiers.find(
-          (t) => t.tierName === item.tierName
-        );
-        if (tier) {
-          tier.capacity += item.quantity; // restore capacity
-        }
-      });
-      await event.save();
-    }
-
     res.status(200).json({
-      msg: "Booking deleted",
-      bookingId: deleted._id,
+      msg: "Booking Cancelled successfully",
+      bookingId: Cancelled._id,
     });
   } catch (error) {
     console.error(error);
@@ -96,9 +56,25 @@ const remove = async (req, res) => {
   }
 };
 
+
+const showevent = async (req, res) => {
+    const { eventId } = req.params;
+    try {
+      const events = await Event.findById(eventId);
+      if (!events) {
+        return res.status(404).json({ msg: "No event found" });
+      }
+      return res.status(200).json(events);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error fetching event" });
+    }
+  }
+
 // Routes
-router.post("/book", create);
-router.get("/book/:bookingId", show);
-router.delete("/book/:bookingId", remove);
+router.post("/", create);
+router.get("/:bookingId", show);
+router.delete("/:bookingId", remove);
+router.get("/event/:eventId", showevent);
 
 module.exports = router;
