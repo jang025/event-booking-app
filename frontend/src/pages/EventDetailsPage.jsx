@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-export default function EventDetailsPage() {
+export default function EventDetailsPage({setEventId}) {
   const [events, setEvents] = useState([]);
   const { eventId } = useParams();
+  setEventId(eventId);
+  const navigate = useNavigate();
   async function getData(id) {
     const url = `http://localhost:3000/api/${id}`;
     try {
@@ -28,7 +31,9 @@ export default function EventDetailsPage() {
   useEffect(() => {
     if (eventId) getData(eventId);
   }, [eventId]);
-
+    const handleChange = () => {
+        navigate(`/book`);
+    }
   return (
     <div>
       {/* search bar */}
@@ -73,7 +78,7 @@ export default function EventDetailsPage() {
           <h3>Details</h3>
           <p>{event.event_long_description}</p>
 
-          <button>Get Tickets</button>
+          <button onClick={handleChange}>Get Tickets</button>
 
           <hr />
         </div>

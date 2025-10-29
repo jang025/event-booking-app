@@ -29,7 +29,7 @@ export default function BookTickets({ eventId, onBooked }) {
 
 
   if (!eventInfo) {
-    return <p>Loading event details…</p>;
+    return <p> choose a event to book</p>;
   }
 
   const ticketOptions = [];
