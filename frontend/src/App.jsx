@@ -8,8 +8,13 @@ import BookTicketPage from "./pages/BookTicketPage";
 import BookingPage from "./pages/BookingPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import EventListPage from "./pages/EventListPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import EditProfilePage from "./pages/EditProfilePage.jsx";
 
 const App = () => {
+  // const [token, setToken] = useState(null);
+  // const [available, setAvailable] = useState(true)
+  // const [ongoing, setOngoing] = useState(true)
   return (
     <main>
       {/* <NavBar /> */}
@@ -21,6 +26,8 @@ const App = () => {
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/eventlist" element={<EventListPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
+        <Route path="/users/:userId" element={<ProfilePage />} />
+        <Route path="/users/:userId/edit" element={<EditProfilePage />} />
       </Routes>
     </main>
   );
