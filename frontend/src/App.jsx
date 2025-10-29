@@ -5,12 +5,12 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import Eventcard from "./components/Eventcard.jsx";
 import BookTicketPage from "./pages/BookTicketPage";
-import BookingPage from "./pages/BookingPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
 import EventListPage from "./pages/EventListPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import EditProfilePage from "./pages/EditProfilePage.jsx";
 import { useState } from "react";
+// import { useState } from "react";
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -30,14 +30,15 @@ const App = () => {
       </main>
     );
   }
+    // const [eventId, setEventId] = useState("68ff71f2254ba4d090ac5dc2");
+ 
   return (
     <main>
       {/* <NavBar /> */}
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/book" element={<BookTicketPage />} />
-        <Route path="/booking" element={<BookingPage />} />
+        <Route path="/book" element={<BookTicketPage/>} />
         <Route path="/eventlist" element={<EventListPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/users/:userId" element={<ProfilePage />} />

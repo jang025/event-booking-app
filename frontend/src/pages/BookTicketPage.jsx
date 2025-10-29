@@ -1,20 +1,9 @@
-import { useLocation, useNavigate } from "react-router-dom";
-
-import BookTickets from "../components/BookTickets";
-
 export default function BookTicketPage() {
-  const { state } = useLocation();
-  const navigate = useNavigate();
-
-  const handleContinue = (payload) => {
-    navigate("/booking", { state: payload });
-  };
-
+  // Component logic and JSX for booking tickets for the event with the given eventId
   return (
-    <>
-      <main>
-        <BookTickets event={state?.event} onContinue={handleContinue} />
-      </main>
-    </>
+    <main>
+      <h1>Book Tickets for Event ID:</h1>
+      {/* Booking form and related components go here */}
+    </main>
   );
-}
+}   

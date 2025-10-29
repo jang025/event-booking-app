@@ -1,14 +1,9 @@
-import { useLocation } from "react-router-dom";
-import ConfirmationTicket from "../components/ConfirmationTicket";
-
-export default function ConfirmationPage() {
-  const { state } = useLocation();
-
-  return (
-    <>
-      <main>
-        <ConfirmationTicket data={state} />
-      </main>
-    </>
-  );
+export default function BookTicketPage() { 
+    // Component logic and JSX for booking tickets for the event with the given eventId         
+    return (
+        <main>
+            <h1>Book Tickets for Event ID:</h1>
+            {/* Booking form and related components go here */}
+        </main>
+    );
 }
