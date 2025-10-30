@@ -30,23 +30,6 @@ const create = async (req, res) => {
       booking_date,
     });
 
-    // Add booking ID to the user's "bookings" array
-    await User.findByIdAndUpdate(userId, {
-      $push: { bookings: newBooking._id },
-    });
-
-    // Reduce the capacity of event tiers
-    const event = await Event.findById(eventId);
-    if (event) {
-      items.forEach((item) => {
-        const tier = event.tiers.find((t) => t.tierName === item.tierName);
-        if (tier) {
-          tier.capacity -= item.quantity;
-        }
-      });
-      await event.save();
-    }
-
     res.status(201).json(newBooking);
   } catch (error) {
     console.error(error);

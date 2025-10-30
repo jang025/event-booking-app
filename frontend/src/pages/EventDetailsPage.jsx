@@ -32,7 +32,7 @@ export default function EventDetailsPage({setEventId}) {
     if (eventId) getData(eventId);
   }, [eventId]);
     const handleChange = () => {
-        navigate(`/book`);
+        navigate(`/book/${eventId}`);
     }
   return (
     <div>

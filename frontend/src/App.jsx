@@ -31,8 +31,8 @@ const App = () => {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage setToken={setToken} />} />
           <Route path="/event/:eventId" element={<EventDetailsPage setEventId={setEventId}/>} />
-          <Route path="/book" element={<BookTicketPage eventId = {eventId}/>} />
-        <Route path="/book/:bookingId" element={<ConfirmationPage />} />
+          <Route path="/book/:eventId" element={<BookTicketPage eventId = {eventId}/>} />
+        <Route path="/book/:eventId/:bookingId" element={<ConfirmationPage />} />
         </Routes>
       </main>
     );
