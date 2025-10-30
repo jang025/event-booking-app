@@ -9,7 +9,7 @@ const saltRounds = 10;
 //! sign up
 const create = async (req, res) => {
   try {
-    const { username, password, email } = req.body;
+    const { username, password, confirmPassword, email } = req.body;
 
     const user = await User.findOne({ username });
 
@@ -23,6 +23,13 @@ const create = async (req, res) => {
       res.status(409).json({ message: "User already exists" });
       return;
     }
+
+    // check if password and confirm password matches
+    if (password !== confirmPassword) {
+      res.status(400).json({ msg: "Passwords do not match" });
+      return;
+    }
+
     // hash the password
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     // create a new user

@@ -44,7 +44,7 @@ const showProfile = async (req, res) => {
 //! update profile
 const updateProfile = async (req, res) => {
   const { userId } = req.params;
-  const { username, password } = req.body;
+  const { username, password, confirmPassword } = req.body;
   //get the authenticated user
   const currentUser = req.user;
 
@@ -58,8 +58,13 @@ const updateProfile = async (req, res) => {
     // new username and password
     const updates = {};
     if (username) updates.username = username;
-    if (password) {
-      // hash the password
+
+    // Update password only if it's being changed
+    if (password || confirmPassword) {
+      if (password !== confirmPassword) {
+        res.status(400).json({ msg: "Passwords do not match" });
+        return;
+      }
       const hashedPassword = await bcrypt.hash(password, saltRounds);
       updates.password = hashedPassword;
     }
