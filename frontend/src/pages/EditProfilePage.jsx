@@ -1,5 +1,12 @@
+import EditForm from "../components/EditForm";
+
 function EditProfilePage() {
-  return <div>EditProfilePage</div>;
+  return (
+    <div>
+      <h1>Edit Profile</h1>
+      <EditForm />
+    </div>
+  );
 }
 
 export default EditProfilePage;
