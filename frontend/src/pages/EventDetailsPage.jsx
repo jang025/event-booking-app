@@ -93,17 +93,35 @@ export default function EventDetailsPage() {
           <p>{formattedDate}</p>
 
           <h3>Location</h3>
-          <p>{event.venue}</p>
-          <p>{event.address}</p>
+          <p style={{ margin: 0 }}>{event.venue}</p>
+          <p style={{ margin: "2px 0 0 0" }}>{event.address}</p>
 
+          {/* organiser information conoatiner */}
           <h3>Organised by</h3>
-          <div>
-            <div>○</div>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <div>
-              <p>{event.organisation?.name}</p>
-              <p>{event.organisation?.description}</p>
+              <img
+                src={event.organisation?.image}
+                style={{
+                  width: "80px",
+                  height: "80px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  margin: "0 25px 0 0",
+                }}
+              />
             </div>
-            <a href={`mailto:${event.organiser_email}`}>email</a>
+            <div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <p style={{ margin: 0 }}>{event.organisation?.name}</p>
+                <p style={{ margin: "2px 0 0 0" }}>
+                  {event.organisation?.description}
+                </p>
+              </div>
+              <div style={{ textAlign: "right", marginTop: "5px" }}>
+                <a href={`mailto:${event.organiser_email}`}>email</a>
+              </div>
+            </div>
           </div>
 
           <h3>Details</h3>
