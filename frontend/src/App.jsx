@@ -17,29 +17,43 @@ const App = () => {
   // const [available, setAvailable] = useState(true);
   // const [ongoing, setOngoing] = useState(true);
   const [eventId, setEventId] = useState("");
+  const [userId, setUserId] = useState(null);
 
+  // public routes
   if (token === null) {
     return (
       <main>
         {/* <NavBar /> */}
         <Routes>
           {/* <Route path="/" element={<HomePage />} /> */}
-          <Route
-            path="/eventlist"
-            element={<EventListPage/>}
-          />
+          <Route path="/eventlist" element={<EventListPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage setToken={setToken} />} />
-          <Route path="/users/:userId" element={<ProfilePage />} />
-          <Route path="/users/:userId/edit" element={<EditProfilePage />} />
-          <Route path="/event/:eventId" element={<EventDetailsPage setEventId={setEventId}/>} />
-          <Route path="/book/:eventId" element={<BookTicketPage eventId = {eventId}/>} />
-        <Route path="/book/:eventId/:bookingId" element={<ConfirmationPage />} />
+          <Route
+            path="/event/:eventId"
+            element={<EventDetailsPage setEventId={setEventId} />}
+          />
+          <Route
+            path="/book/:eventId"
+            element={<BookTicketPage eventId={eventId} />}
+          />
+          <Route
+            path="/book/:eventId/:bookingId"
+            element={<ConfirmationPage />}
+          />
+          <Route
+            path="/users/:userId"
+            element={<ProfilePage token={token} />}
+          />
+          <Route
+            path="/users/:userId/edit"
+            element={<EditProfilePage token={token} />}
+          />
         </Routes>
       </main>
     );
   }
-
+  // protected routes (require a token)
   return (
     <main>
       {/* <NavBar /> */}
