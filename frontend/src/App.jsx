@@ -17,7 +17,9 @@ const App = () => {
   // const [available, setAvailable] = useState(true);
   // const [ongoing, setOngoing] = useState(true);
   const [eventId, setEventId] = useState("");
+  const [userId, setUserId] = useState(null);
 
+  // public routes
   if (token === null) {
     return (
       <main>
@@ -33,13 +35,19 @@ const App = () => {
           <Route path="/event/:eventId" element={<EventDetailsPage />} />
           <Route path="/book" element={<BookTicketPage />} />
           <Route path="/book/:bookingId" element={<ConfirmationPage />} />
-          <Route path="/users/:userId" element={<ProfilePage />} />
-          <Route path="/users/:userId/edit" element={<EditProfilePage />} />
+          <Route
+            path="/users/:userId"
+            element={<ProfilePage token={token} />}
+          />
+          <Route
+            path="/users/:userId/edit"
+            element={<EditProfilePage token={token} />}
+          />
         </Routes>
       </main>
     );
   }
-
+  // protected routes (require a token)
   return (
     <main>
       {/* <NavBar /> */}

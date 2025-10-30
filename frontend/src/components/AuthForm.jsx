@@ -5,7 +5,7 @@ function AuthForm({
   redirectLink,
   handleSubmit,
   handleChange,
-  formData,
+  user,
 }) {
   return (
     <div>
@@ -17,29 +17,39 @@ function AuthForm({
           id="username"
           name="username"
           placeholder="Enter your username"
-          value={formData.username}
+          value={user.username}
           onChange={handleChange}
           required
         />
         <label htmlFor="password">Password: </label>
         <input
-          type="password"
+          type="text"
           id="password"
           name="password"
           placeholder="Enter your password"
-          value={formData.password}
+          value={user.password}
           onChange={handleChange}
           required
         />
         {title === "Create Account" && (
           <>
+            <label htmlFor="confirmPassword">Confirm Password: </label>
+            <input
+              type="text"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={user.confirmPassword}
+              onChange={handleChange}
+              required
+            />
             <label htmlFor="email">Email: </label>
             <input
               type="email"
               id="email"
               name="email"
               placeholder="Enter your email"
-              value={formData.email}
+              value={user.email}
               onChange={handleChange}
               required
             />

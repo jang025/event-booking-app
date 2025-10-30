@@ -1,39 +1,24 @@
 import { useState } from "react";
 import AuthForm from "../components/AuthForm";
-const baseUrl = import.meta.env.VITE_BACKEND_URL;
+import { signup } from "../services/authService";
 
 function SignupPage() {
-  const [formData, setFormData] = useState({
+  const [user, setUser] = useState({
     username: "",
     password: "",
+    confirmPassword: "",
     email: "",
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setUser({ ...user, [name]: value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const url = `${baseUrl}/api/auth/signup`;
-      console.log(url);
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await signup(user);
+    console.log(response);
   };
 
   return (
@@ -44,7 +29,7 @@ function SignupPage() {
       redirectLink="/login"
       handleSubmit={handleSubmit}
       handleChange={handleChange}
-      formData={formData}
+      user={user}
     />
   );
 }

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import AuthForm from "../components/AuthForm";
-const baseUrl = import.meta.env.VITE_BACKEND_URL;
+import { login } from "../services/authService";
 
-function LoginPage() {
-  const [formData, setFormData] = useState({
+function LoginPage({ setToken }) {
+  const [user, setUser] = useState({
     username: "",
     password: "",
     email: "",
@@ -11,28 +11,14 @@ function LoginPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setUser({ ...user, [name]: value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const url = `${baseUrl}/api/auth/login`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await login(user);
+    console.log(response);
+    setToken(response.token);
   };
 
   return (
@@ -43,7 +29,7 @@ function LoginPage() {
       redirectLink="/signup"
       handleSubmit={handleSubmit}
       handleChange={handleChange}
-      formData={formData}
+      user={user}
     />
   );
 }
