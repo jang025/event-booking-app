@@ -2,8 +2,45 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 export default function EventDetailsPage() {
-  const [event, setEvent] = useState([]);
+  const [event, setEvent] = useState({});
   const { eventId } = useParams();
+  const start = new Date(event.start_date_time);
+  const end = new Date(event.end_date_time);
+  //formatting the date
+  if (start.toDateString() === end.toDateString()) {
+    var formattedDate = `${start.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    })} — ${start.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })} to ${end.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })}`;
+  } else {
+    // different days
+    var formattedDate = `${start.toLocaleString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })} — ${end.toLocaleString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })}`;
+  }
+
   async function getData(id) {
     const url = `http://localhost:3000/api/${id}`;
     try {
@@ -14,7 +51,7 @@ export default function EventDetailsPage() {
 
       const result = await response.json();
       console.log(result);
-      setEvent([result]);
+      setEvent(result);
     } catch (error) {
       console.error(error.message);
     }
@@ -35,7 +72,7 @@ export default function EventDetailsPage() {
 
       {/* image */}
       <div>
-        {event.event_image && (
+        {event?.event_image && (
           <img
             src={event.event_image}
             alt={event.long_title}
@@ -46,17 +83,14 @@ export default function EventDetailsPage() {
       </div>
 
       {/* event details */}
-      {event.map((event) => (
+      {event && (
         <div key={event._id}>
           <h2>{event.long_title}</h2>
           <p>{event.event_short_description}</p>
           <p>{event.status}</p>
 
           <h3>Date and Time</h3>
-          <p>
-            {new Date(event.start_date_time).toLocaleString()} —{" "}
-            {new Date(event.end_date_time).toLocaleString()}
-          </p>
+          <p>{formattedDate}</p>
 
           <h3>Location</h3>
           <p>{event.venue}</p>
@@ -66,8 +100,8 @@ export default function EventDetailsPage() {
           <div>
             <div>○</div>
             <div>
-              <p>{event.organisation.name}</p>
-              <p>{event.organisation.description}</p>
+              <p>{event.organisation?.name}</p>
+              <p>{event.organisation?.description}</p>
             </div>
             <a href={`mailto:${event.organiser_email}`}>email</a>
           </div>
@@ -76,10 +110,9 @@ export default function EventDetailsPage() {
           <p>{event.event_long_description}</p>
 
           <button>Get Tickets</button>
-
           <hr />
         </div>
-      ))}
+      )}
     </div>
   );
 }
