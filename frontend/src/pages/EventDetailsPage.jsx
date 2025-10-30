@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export default function EventDetailsPage() {
   const [event, setEvent] = useState({});
   const { eventId } = useParams();
   const start = new Date(event.start_date_time);
   const end = new Date(event.end_date_time);
+  const navigate = useNavigate();
   //formatting the date
   if (start.toDateString() === end.toDateString()) {
     var formattedDate = `${start.toLocaleDateString("en-US", {
@@ -62,6 +64,12 @@ export default function EventDetailsPage() {
     if (eventId) getData(eventId);
   }, [eventId]);
 
+  useEffect(() => {
+    if (eventId) getData(eventId);
+  }, [eventId]);
+    const handleChange = () => {
+        navigate(`/book/${eventId}`);
+    }
   return (
     <div>
       {/* search bar */}
@@ -127,7 +135,8 @@ export default function EventDetailsPage() {
           <h3>Details</h3>
           <p>{event.event_long_description}</p>
 
-          <button>Get Tickets</button>
+          <button onClick={handleChange}>Get Tickets</button>
+
           <hr />
         </div>
       )}

@@ -29,7 +29,7 @@ export default function BookTickets({ eventId, onBooked }) {
 
 
   if (!eventInfo) {
-    return <p>Loading event details…</p>;
+    return <p> choose a event to book</p>;
   }
 
   const ticketOptions = [];
@@ -134,7 +134,6 @@ export default function BookTickets({ eventId, onBooked }) {
     }
   }
 
-
   return (
     <section>
       <h1>{eventInfo.short_title ? eventInfo.short_title : "Event Title"}</h1>
@@ -149,11 +148,17 @@ export default function BookTickets({ eventId, onBooked }) {
         https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString */}
         {eventInfo.start_date_time && eventInfo.end_date_time ? (
   <div>
-    <p>
-      <strong>Date:</strong>{" "}
-      {new Date(eventInfo.start_date_time).toLocaleDateString()} —{" "}
-      {new Date(eventInfo.end_date_time).toLocaleDateString()}
-    </p>
+  
+  <p>
+    <strong>Date:</strong>{" "}
+    {
+      new Date(eventInfo.start_date_time).toDateString() ===
+      new Date(eventInfo.end_date_time).toDateString()
+        ? new Date(eventInfo.start_date_time).toLocaleDateString()
+        : `${new Date(eventInfo.start_date_time).toLocaleDateString()} — ${new Date(eventInfo.end_date_time).toLocaleDateString()}`
+    }
+  </p>
+
     <p>
       <strong>Time:</strong>{" "}
       {new Date(eventInfo.start_date_time).toLocaleTimeString([], {
