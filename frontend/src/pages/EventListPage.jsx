@@ -8,6 +8,7 @@ export default function EventListPage({ setEventId }) {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [filteredEvents, setFilteredEvents] = useState(events || []);
   const [selectedSort, setSelectedSort] = useState("date");
+  const [searchTerm, setSearchTerm] = useState("");
 
   //categories for filter function
   let categories = [
@@ -44,6 +45,19 @@ export default function EventListPage({ setEventId }) {
     setSelectedSort(value);
   }
 
+  function handleSearch() {
+    const term = searchTerm.toLowerCase();
+
+    const filtered = events.filter(
+      (event) =>
+        event.long_title.toLowerCase().includes(term) ||
+        event.short_title.toLowerCase().includes(term) ||
+        event.venue.toLowerCase().includes(term)
+    );
+
+    setFilteredEvents(filtered);
+  }
+
   const handleFilterButtonClick = (selectedCategory) => {
     setSelectedFilter(selectedCategory);
     console.log("selected category:", selectedCategory);
@@ -66,6 +80,14 @@ export default function EventListPage({ setEventId }) {
         <input
           type="text"
           placeholder="Search events"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleSearch();
+            }
+          }}
           style={{
             maxWidth: "350px",
             minWidth: "150px",
@@ -74,6 +96,7 @@ export default function EventListPage({ setEventId }) {
           }}
         ></input>
         <button
+          onClick={handleSearch}
           style={{ height: "100%", padding: "0 16px", boxSizing: "border-box" }}
         >
           {" "}
