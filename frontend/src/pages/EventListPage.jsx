@@ -130,6 +130,9 @@ export default function EventListPage({ setEventId }) {
           height: "160px",
           gap: "15px",
           alignContent: "center",
+          maxWidth: "1000px",
+          minWidth: "800px",
+          width: "100%",
         }}
       >
         {filteredEvents.map((event) => (

@@ -2,8 +2,45 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 export default function EventDetailsPage() {
-  const [events, setEvents] = useState([]);
+  const [event, setEvent] = useState({});
   const { eventId } = useParams();
+  const start = new Date(event.start_date_time);
+  const end = new Date(event.end_date_time);
+  //formatting the date
+  if (start.toDateString() === end.toDateString()) {
+    var formattedDate = `${start.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    })} — ${start.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })} to ${end.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })}`;
+  } else {
+    // different days
+    var formattedDate = `${start.toLocaleString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })} — ${end.toLocaleString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })}`;
+  }
+
   async function getData(id) {
     const url = `http://localhost:3000/api/${id}`;
     try {
@@ -14,7 +51,7 @@ export default function EventDetailsPage() {
 
       const result = await response.json();
       console.log(result);
-      setEvents([result]);
+      setEvent(result);
     } catch (error) {
       console.error(error.message);
     }
@@ -22,10 +59,6 @@ export default function EventDetailsPage() {
 
   useEffect(() => {
     console.log("eventid:", eventId);
-    if (eventId) getData(eventId);
-  }, [eventId]);
-
-  useEffect(() => {
     if (eventId) getData(eventId);
   }, [eventId]);
 
@@ -39,45 +72,65 @@ export default function EventDetailsPage() {
 
       {/* image */}
       <div>
-        <p>image</p>
+        {event?.event_image && (
+          <img
+            src={event.event_image}
+            alt={event.long_title}
+            style={{ width: "100%", maxWidth: "600px", borderRadius: "8px" }}
+          />
+        )}
         <button>→</button>
       </div>
 
       {/* event details */}
-      {events.map((event) => (
+      {event && (
         <div key={event._id}>
           <h2>{event.long_title}</h2>
           <p>{event.event_short_description}</p>
           <p>{event.status}</p>
 
           <h3>Date and Time</h3>
-          <p>
-            {new Date(event.start_time).toLocaleString()} —{" "}
-            {new Date(event.end_time).toLocaleString()}
-          </p>
+          <p>{formattedDate}</p>
 
           <h3>Location</h3>
-          <p>{event.venue}</p>
-          <p>{event.address}</p>
+          <p style={{ margin: 0 }}>{event.venue}</p>
+          <p style={{ margin: "2px 0 0 0" }}>{event.address}</p>
 
+          {/* organiser information conoatiner */}
           <h3>Organised by</h3>
-          <div>
-            <div>○</div>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <div>
-              <p>{event.organiser_name}</p>
-              <p>{event.organiser_description}</p>
+              <img
+                src={event.organisation?.image}
+                style={{
+                  width: "80px",
+                  height: "80px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  margin: "0 25px 0 0",
+                }}
+              />
             </div>
-            <a href={`mailto:${event.organiser_email}`}>email</a>
+            <div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <p style={{ margin: 0 }}>{event.organisation?.name}</p>
+                <p style={{ margin: "2px 0 0 0" }}>
+                  {event.organisation?.description}
+                </p>
+              </div>
+              <div style={{ textAlign: "right", marginTop: "5px" }}>
+                <a href={`mailto:${event.organiser_email}`}>email</a>
+              </div>
+            </div>
           </div>
 
           <h3>Details</h3>
           <p>{event.event_long_description}</p>
 
           <button>Get Tickets</button>
-
           <hr />
         </div>
-      ))}
+      )}
     </div>
   );
 }

@@ -11,29 +11,57 @@ post {
 }
 
 body:json {
-  {
-    "short_title": "Tech Meetup SG",
-    "long_title": "Tech Meetup Singapore 2025",
-    "event_image": "/images/tech-meetup.png",
-    "category": "Business & Networking",
-    "start_date_time": "2025-11-01T09:00:00Z",
-    "end_date_time": "2025-11-01T18:00:00Z",
-    "venue": "Suntec Singapore Convention & Exhibition Centre",
-    "address": "1 Raffles Blvd, Singapore 039593",
-    "organisation": {
-      "name": "Tech Network",
-      "description": "A community of developers and innovators in Southeast Asia.",
-      "contact_person_name": "Jane Doe",
-      "contact_person_email": "jane@technetwork.com",
-      "image": "/images/jane.jpg"
+  [
+    {
+      "long_title": "Artistry in Motion: Contemporary Art Exhibition 2025",
+      "short_title": "Artistry in Motion",
+      "event_image": [
+        "https://images.unsplash.com/photo-1496317899792-9d7dbcd928a1?auto=format&w=1200&q=80"
+      ],
+      "category": "Arts & Culture",
+      "start_date_time": "2025-12-01T10:00:00Z",
+      "end_date_time": "2025-12-10T18:00:00Z",
+      "venue": "National Gallery Singapore",
+      "address": "1 St Andrew’s Road, Singapore 178957",
+      "organisation": {
+        "name": "Singapore Art Society",
+        "description": "Championing visual arts and emerging artists across Southeast Asia.",
+        "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&w=200&q=80",
+        "contact_person_name": "Melissa Tan",
+        "contact_person_email": "melissa@sgartsociety.org"
+      },
+      "event_short_description": "Explore over 300 works from leading modern artists in Southeast Asia.",
+      "event_long_description": "Artistry in Motion brings together local and international talents in a bold showcase of painting, sculpture, and immersive installations. Experience art that challenges, inspires, and connects communities.",
+      "tiers": [
+        { "tierName": "General Admission", "unitPrice": 15, "capacity": 500 }
+      ],
+      "status": "upcoming"
     },
-    "event_short_description": "Join Singapore’s biggest tech networking event of the year.",
-    "event_long_description": "Tech Meetup Singapore brings together founders, engineers, and investors to discuss the latest in AI, startups, and emerging tech trends.",
-    "tiers": [
-      { "tierName": "General", "unitPrice": 100, "capacity": 200 },
-      { "tierName": "VIP", "unitPrice": 250, "capacity": 50 }
-    ],
-    "status": "ongoing"
-  }
+    {
+      "long_title": "Strings & Stories: A Night of Classical Music",
+      "short_title": "Strings & Stories",
+      "event_image": [
+        "https://images.unsplash.com/photo-1485567725071-7a67e27ef2d2?auto=format&w=1200&q=80"
+      ],
+      "category": "Arts & Culture",
+      "start_date_time": "2025-12-14T19:00:00Z",
+      "end_date_time": "2025-12-14T21:30:00Z",
+      "venue": "Victoria Concert Hall",
+      "address": "11 Empress Place, Singapore 179558",
+      "organisation": {
+        "name": "Singapore Symphony Orchestra",
+        "description": "Bringing world-class orchestral performances to local audiences.",
+        "image": "https://images.unsplash.com/photo-1505672678657-cc7037095e2c?auto=format&w=200&q=80",
+        "contact_person_name": "Gerald Lim",
+        "contact_person_email": "gerald@singaporesymphony.sg"
+      },
+      "event_short_description": "An evening of storytelling through strings and symphony.",
+      "event_long_description": "The Singapore Symphony Orchestra presents an enchanting repertoire blending classic and contemporary compositions, featuring guest violinist Lee Yuna.",
+      "tiers": [
+        { "tierName": "Standard", "unitPrice": 60, "capacity": 300 }
+      ],
+      "status": "upcoming"
+    }
+  ]
   
 }

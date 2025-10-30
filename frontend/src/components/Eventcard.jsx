@@ -34,15 +34,22 @@ export default function Eventcard({ event, setEventId }) {
 
   return (
     <>
-      <a href={`/event/${_id}`} className="placecardlink">
+      <a
+        href={`/event/${_id}`}
+        className="placecardlink"
+        style={{ textDecoration: "none", color: "black" }}
+      >
         <div
           style={{
-            display: "inline-flex",
+            display: "flex",
+            flexWrap: "wrap",
             alignItems: "flex-start",
             gap: "20px",
-            maxWidth: "700px",
             borderStyle: "solid",
             verticalAlign: "top",
+            width: "100%",
+            maxWidth: "1000px",
+            minWidth: "400px",
           }}
         >
           {/* image container */}
@@ -59,7 +66,13 @@ export default function Eventcard({ event, setEventId }) {
               }}
             />
           </div>
-          <div style={{ flex: 1, width: "100%" }}>
+          <div
+            style={{
+              flex: 1,
+              width: "100%",
+              flexWrap: "wrap",
+            }}
+          >
             <h2 style={{ margin: 3 }}>{long_title}</h2>
             <p style={{ margin: 3 }}>{formatted}</p>
             <p style={{ margin: 3 }}>{venue}</p>
@@ -70,6 +83,7 @@ export default function Eventcard({ event, setEventId }) {
                 alignItems: "baseline",
                 margin: 0,
                 flexDirection: "row",
+                textDecoration: "none",
               }}
             >
               <p style={{ margin: 3 }}>{lowestPrice}</p>
