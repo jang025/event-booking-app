@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 export default function EventDetailsPage() {
-  const [events, setEvents] = useState([]);
+  const [event, setEvent] = useState([]);
   const { eventId } = useParams();
   async function getData(id) {
     const url = `http://localhost:3000/api/${id}`;
@@ -14,7 +14,7 @@ export default function EventDetailsPage() {
 
       const result = await response.json();
       console.log(result);
-      setEvents([result]);
+      setEvent([result]);
     } catch (error) {
       console.error(error.message);
     }
@@ -22,10 +22,6 @@ export default function EventDetailsPage() {
 
   useEffect(() => {
     console.log("eventid:", eventId);
-    if (eventId) getData(eventId);
-  }, [eventId]);
-
-  useEffect(() => {
     if (eventId) getData(eventId);
   }, [eventId]);
 
@@ -39,12 +35,18 @@ export default function EventDetailsPage() {
 
       {/* image */}
       <div>
-        <p>image</p>
+        {event.event_image && (
+          <img
+            src={event.event_image}
+            alt={event.long_title}
+            style={{ width: "100%", maxWidth: "600px", borderRadius: "8px" }}
+          />
+        )}
         <button>→</button>
       </div>
 
       {/* event details */}
-      {events.map((event) => (
+      {event.map((event) => (
         <div key={event._id}>
           <h2>{event.long_title}</h2>
           <p>{event.event_short_description}</p>
@@ -52,8 +54,8 @@ export default function EventDetailsPage() {
 
           <h3>Date and Time</h3>
           <p>
-            {new Date(event.start_time).toLocaleString()} —{" "}
-            {new Date(event.end_time).toLocaleString()}
+            {new Date(event.start_date_time).toLocaleString()} —{" "}
+            {new Date(event.end_date_time).toLocaleString()}
           </p>
 
           <h3>Location</h3>
@@ -64,8 +66,8 @@ export default function EventDetailsPage() {
           <div>
             <div>○</div>
             <div>
-              <p>{event.organiser_name}</p>
-              <p>{event.organiser_description}</p>
+              <p>{event.organisation.name}</p>
+              <p>{event.organisation.description}</p>
             </div>
             <a href={`mailto:${event.organiser_email}`}>email</a>
           </div>
