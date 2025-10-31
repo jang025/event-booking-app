@@ -1,6 +1,7 @@
 // import { sampleEvents } from "../data/sampleEvents.js";
+import { Link } from "react-router-dom";
 
-export default function Eventcard({ event, setEventId }) {
+export default function Eventcard({ event, setSelectedEvent }) {
   // function receives event object, stores it in a variable named event
 
   const {
@@ -34,10 +35,10 @@ export default function Eventcard({ event, setEventId }) {
 
   return (
     <>
-      <a
-        href={`/event/${_id}`}
-        className="placecardlink"
-        style={{ textDecoration: "none", color: "black" }}
+      <Link
+        to={`/event/${event._id}`}
+        onClick={() => setSelectedEvent(event)} //set state on click
+        style={{ textDecoration: "none", color: "inherit" }}
       >
         <div
           style={{
@@ -91,7 +92,7 @@ export default function Eventcard({ event, setEventId }) {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </>
   );
 }

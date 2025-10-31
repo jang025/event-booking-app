@@ -1,11 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
+import { useEffect, useState } from "react";
 
-export default function EventDetailsPage() {
-  const [event, setEvent] = useState({});
+export default function EventDetailsPage({ selectedEvent }) {
   const { eventId } = useParams();
+  const [event, setEvent] = useState(selectedEvent || null);
+
+  console.log("event id from url is:", eventId);
+  console.log("props received in EventDetailsPage:", selectedEvent);
+
+  // async function getData(id) {
+  //   const url = `http://localhost:3000/api/${id}`;
+  //   try {
+  //     const response = await fetch(url);
+  //     if (!response.ok) {
+  //       throw new Error(`Response status: ${response.status}`);
+  //     }
+
+  //     const result = await response.json();
+  //     console.log(result);
+  //     setEvent(result);
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // }
+
+  useEffect(() => {
+    // if no event was passed, fetch it
+    if (!selectedEvent && eventId) {
+      fetch(`http://localhost:3000/api/${eventId}`)
+        .then((res) => res.json())
+        .then((data) => setEvent(data))
+        .catch((err) => console.error(err));
+    }
+  }, [eventId, selectedEvent]);
+  if (!event) return <p>Loading event details...</p>;
   const start = new Date(event.start_date_time);
   const end = new Date(event.end_date_time);
+
   //formatting the date
   if (start.toDateString() === end.toDateString()) {
     var formattedDate = `${start.toLocaleDateString("en-US", {
@@ -40,27 +71,6 @@ export default function EventDetailsPage() {
       hour12: true,
     })}`;
   }
-
-  async function getData(id) {
-    const url = `http://localhost:3000/api/${id}`;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      console.log(result);
-      setEvent(result);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
-
-  useEffect(() => {
-    console.log("eventid:", eventId);
-    if (eventId) getData(eventId);
-  }, [eventId]);
 
   return (
     <div>
@@ -127,7 +137,28 @@ export default function EventDetailsPage() {
           <h3>Details</h3>
           <p>{event.event_long_description}</p>
 
-          <button>Get Tickets</button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: "20px",
+            }}
+          >
+            <Link to={`/book/${event._id}`} style={{ textDecoration: "none" }}>
+              <button
+                style={{
+                  backgroundColor: "black",
+                  color: "white",
+                  padding: "10px 20px",
+                  borderRadius: "6px",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Get Tickets
+              </button>
+            </Link>
+          </div>
           <hr />
         </div>
       )}

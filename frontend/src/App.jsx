@@ -10,10 +10,12 @@ import EventListPage from "./pages/EventListPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import EditProfilePage from "./pages/EditProfilePage.jsx";
 import EventDetailsPage from "./pages/EventDetailsPage.jsx";
+
 import { useState } from "react";
 
 const App = () => {
   const [token, setToken] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   // const [available, setAvailable] = useState(true);
   // const [ongoing, setOngoing] = useState(true);
   const [eventId, setEventId] = useState("");
@@ -26,11 +28,19 @@ const App = () => {
           {/* <Route path="/" element={<HomePage />} /> */}
           <Route
             path="/eventlist"
-            element={<EventListPage setEventId={setEventId} />}
+            element={
+              <EventListPage
+                setEventId={setEventId}
+                setSelectedEvent={setSelectedEvent}
+              />
+            }
           />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage setToken={setToken} />} />
-          <Route path="/event/:eventId" element={<EventDetailsPage />} />
+          <Route
+            path="/event/:eventId"
+            element={<EventDetailsPage selectedEvent={selectedEvent} />}
+          />
           <Route path="/book" element={<BookTicketPage />} />
           <Route path="/book/:bookingId" element={<ConfirmationPage />} />
           <Route path="/users/:userId" element={<ProfilePage />} />
