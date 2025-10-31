@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getBooking, eventData } from "../../services/bookingService.js";
+import { getBooking, eventData } from "../services/bookingService.js";
 import Confirmation from "../components/ConfirmationTicket.jsx";
 
 export default function ConfirmationPage() {
@@ -8,7 +8,7 @@ export default function ConfirmationPage() {
   const [booking, setBooking] = useState(null);
   const [event, setEvent] = useState(null);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     (async () => {
       try {
@@ -21,7 +21,7 @@ export default function ConfirmationPage() {
   }, [bookingId]);
 
   useEffect(() => {
-    if (!booking?.eventId) return; 
+    if (!booking?.eventId) return;
     (async () => {
       try {
         const data = await eventData(booking.eventId);
@@ -40,8 +40,12 @@ export default function ConfirmationPage() {
     <section>
       <h2>Booking Confirmation</h2>
       <h3>{event?.long_title || "Event Title"}</h3>
-      <p><b>Booking ID:</b> {booking._id}</p>
-      <p><b>Status:</b> {booking.status}</p>
+      <p>
+        <b>Booking ID:</b> {booking._id}
+      </p>
+      <p>
+        <b>Status:</b> {booking.status}
+      </p>
 
       <Confirmation booking={booking} />
 

@@ -1,12 +1,11 @@
 // components/BookTickets.jsx
 import { useEffect, useState } from "react";
-import { eventData, bookTickets } from "../../services/bookingService.js";
+import { eventData, bookTickets } from "../services/bookingService.js";
 
 export default function BookTickets({ eventId, onBooked }) {
   const [eventInfo, setEventInfo] = useState(null);
   const [count, setCount] = useState(1);
   const [types, setTypes] = useState([""]);
-
 
   useEffect(() => {
     async function loadEvent() {
@@ -27,7 +26,6 @@ export default function BookTickets({ eventId, onBooked }) {
     if (eventId) loadEvent();
   }, [eventId]);
 
-
   if (!eventInfo) {
     return <p> choose a event to book</p>;
   }
@@ -41,7 +39,6 @@ export default function BookTickets({ eventId, onBooked }) {
 
   const defaultType = ticketOptions.length > 0 ? ticketOptions[0] : "Entry";
 
- 
   function clamp(num, min, max) {
     if (num < min) return min;
     if (num > max) return max;
@@ -62,7 +59,7 @@ export default function BookTickets({ eventId, onBooked }) {
   }
 
   function changeType(index, value) {
-    const copy = types.slice(); 
+    const copy = types.slice();
     copy[index] = value;
     setTypes(copy);
   }
@@ -79,7 +76,6 @@ export default function BookTickets({ eventId, onBooked }) {
   }
 
   async function handleBook() {
-   
     const group = {};
     for (let i = 0; i < types.length; i++) {
       const name = types[i];
@@ -90,7 +86,6 @@ export default function BookTickets({ eventId, onBooked }) {
       }
     }
 
-   
     const items = [];
     for (const tierName in group) {
       const qty = group[tierName];
@@ -137,44 +132,45 @@ export default function BookTickets({ eventId, onBooked }) {
   return (
     <section>
       <h1>{eventInfo.short_title ? eventInfo.short_title : "Event Title"}</h1>
-      <h2>{eventInfo.long_title ? eventInfo.long_title : "Event Title" }</h2>
-      <img 
-      src={eventInfo.event_image || eventInfo.image_url || "placeholder.jpg"}
-      alt={eventInfo.short_title || "Event"}
-      style={{ maxWidth: "300px", borderRadius: "8px" }}
+      <h2>{eventInfo.long_title ? eventInfo.long_title : "Event Title"}</h2>
+      <img
+        src={eventInfo.event_image || eventInfo.image_url || "placeholder.jpg"}
+        alt={eventInfo.short_title || "Event"}
+        style={{ maxWidth: "300px", borderRadius: "8px" }}
       />
       {/*https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString
         https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString
         https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString */}
-        {eventInfo.start_date_time && eventInfo.end_date_time ? (
-  <div>
-  
-  <p>
-    <strong>Date:</strong>{" "}
-    {
-      new Date(eventInfo.start_date_time).toDateString() ===
-      new Date(eventInfo.end_date_time).toDateString()
-        ? new Date(eventInfo.start_date_time).toLocaleDateString()
-        : `${new Date(eventInfo.start_date_time).toLocaleDateString()} — ${new Date(eventInfo.end_date_time).toLocaleDateString()}`
-    }
-  </p>
+      {eventInfo.start_date_time && eventInfo.end_date_time ? (
+        <div>
+          <p>
+            <strong>Date:</strong>{" "}
+            {new Date(eventInfo.start_date_time).toDateString() ===
+            new Date(eventInfo.end_date_time).toDateString()
+              ? new Date(eventInfo.start_date_time).toLocaleDateString()
+              : `${new Date(
+                  eventInfo.start_date_time
+                ).toLocaleDateString()} — ${new Date(
+                  eventInfo.end_date_time
+                ).toLocaleDateString()}`}
+          </p>
 
-    <p>
-      <strong>Time:</strong>{" "}
-      {new Date(eventInfo.start_date_time).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      })}{" "}
-      to{" "}
-      {new Date(eventInfo.end_date_time).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      })}
-    </p>
-  </div>
-) : (
-  <p>Date and time not available</p>
-)}
+          <p>
+            <strong>Time:</strong>{" "}
+            {new Date(eventInfo.start_date_time).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}{" "}
+            to{" "}
+            {new Date(eventInfo.end_date_time).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </p>
+        </div>
+      ) : (
+        <p>Date and time not available</p>
+      )}
       <div style={{ margin: "1em 0" }}>
         <span>Tickets: </span>
         <button onClick={() => changeCount(-1)}>-</button>
