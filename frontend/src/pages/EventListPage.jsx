@@ -3,7 +3,7 @@ import React from "react";
 import Eventcard from "../components/Eventcard.jsx";
 import { useState, useEffect } from "react";
 
-export default function EventListPage() {
+export default function EventListPage({ setEventId }) {
   const [events, setEvents] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [filteredEvents, setFilteredEvents] = useState(events || []);
@@ -159,7 +159,7 @@ export default function EventListPage() {
         }}
       >
         {filteredEvents.map((event) => (
-          <Eventcard key={event._id} event={event} />
+          <Eventcard key={event._id} setEventId={setEventId} event={event} />
         ))}
       </div>
     </div>
