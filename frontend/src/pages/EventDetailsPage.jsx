@@ -36,6 +36,7 @@ export default function EventDetailsPage({ selectedEvent }) {
   if (!event) return <p>Loading event details...</p>;
   const start = new Date(event.start_date_time);
   const end = new Date(event.end_date_time);
+
   //formatting the date
   if (start.toDateString() === end.toDateString()) {
     var formattedDate = `${start.toLocaleDateString("en-US", {
@@ -71,12 +72,6 @@ export default function EventDetailsPage({ selectedEvent }) {
     })}`;
   }
 
-  useEffect(() => {
-    if (eventId) getData(eventId);
-  }, [eventId]);
-  const handleChange = () => {
-    navigate(`/book/${eventId}`);
-  };
   return (
     <div>
       {/* search bar */}
