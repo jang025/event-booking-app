@@ -72,6 +72,33 @@ export default function EventDetailsPage({ selectedEvent }) {
     })}`;
   }
 
+  async function getData(id) {
+    const url = `http://localhost:3000/api/${id}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log(result);
+      setEvent(result);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    console.log("eventid:", eventId);
+    if (eventId) getData(eventId);
+  }, [eventId]);
+
+//   useEffect(() => {
+//     if (eventId) getData(eventId);
+//   }, [eventId]);
+    const handleChange = () => {
+        navigate(`/book/${eventId}`);
+    }
   return (
     <div>
       {/* search bar */}
@@ -137,7 +164,7 @@ export default function EventDetailsPage({ selectedEvent }) {
           <h3>Details</h3>
           <p>{event.event_long_description}</p>
 
-          <button>Get Tickets</button>
+          <button onClick={handleChange}>Get Tickets</button>
           <hr />
         </div>
       )}

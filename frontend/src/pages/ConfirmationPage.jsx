@@ -10,28 +10,24 @@ export default function ConfirmationPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    (async () => {
+    const fetchData = async () => {
       try {
-        const data = await getBooking(bookingId);
-        setBooking(data);
-      } catch (e) {
-        console.error("Error fetching booking:", e.message);
-      }
-    })();
-  }, [bookingId]);
 
-  useEffect(() => {
-    if (!booking?.eventId) return;
-    (async () => {
-      try {
-        const data = await eventData(booking.eventId);
-        setEvent(data);
-      } catch (e) {
-        console.error("Error fetching event:", e.message);
-      }
-    })();
-  }, [booking]);
+        const bookingData = await getBooking(bookingId);
+        setBooking(bookingData);
 
+
+        if (bookingData?.eventId) {
+          const eventDataResult = await eventData(bookingData.eventId);
+          setEvent(eventDataResult);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    fetchData();
+  }, [bookingId]); 
   const handleClick = () => navigate("/homepage");
 
   if (!booking) return <p>Loading confirmation…</p>;
