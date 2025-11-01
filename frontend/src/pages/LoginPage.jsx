@@ -1,13 +1,16 @@
 import { useState } from "react";
 import AuthForm from "../components/AuthForm";
 import { login } from "../services/authService";
+import { useNavigate } from "react-router";
 
-function LoginPage({ setToken }) {
+function LoginPage({ setToken, setUserId }) {
   const [user, setUser] = useState({
     username: "",
     password: "",
     email: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -19,6 +22,9 @@ function LoginPage({ setToken }) {
     const response = await login(user);
     console.log(response);
     setToken(response.token);
+    setUserId(response.userId);
+    // navigate to profile page
+    navigate(`/users/${response.userId}`);
   };
 
   return (

@@ -1,5 +1,6 @@
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
+//! fetch user profile
 export const show = async (userId, token) => {
   const url = `${baseUrl}/api/users/${userId}`;
   try {
@@ -21,8 +22,9 @@ export const show = async (userId, token) => {
   }
 };
 
-export const remove = async (userId, token) => {
-  const url = `${baseUrl}/api/users/${userId}`;
+//! delete booking
+export const remove = async (bookingId, token) => {
+  const url = `${baseUrl}/api/users/bookings/${bookingId}`;
   try {
     const response = await fetch(url, {
       method: "DELETE",
@@ -42,6 +44,7 @@ export const remove = async (userId, token) => {
   }
 };
 
+//! update user profile
 export const update = async (profile, userId, token) => {
   const url = `${baseUrl}/api/users/${userId}/edit`;
   try {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AuthForm from "../components/AuthForm";
 import { signup } from "../services/authService";
+import { useNavigate } from "react-router";
 
 function SignupPage() {
   const [user, setUser] = useState({
@@ -9,6 +10,8 @@ function SignupPage() {
     confirmPassword: "",
     email: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -19,6 +22,8 @@ function SignupPage() {
     event.preventDefault();
     const response = await signup(user);
     console.log(response);
+    // navigate to profile page
+    navigate(`/users/${response.userId}`);
   };
 
   return (

@@ -124,6 +124,6 @@ const deleteBooking = async (req, res) => {
 
 router.get("/:userId", isLoggedIn, showProfile);
 router.put("/:userId/edit", isLoggedIn, updateProfile);
-router.delete("/:userId", isLoggedIn, deleteBooking);
+router.delete("/bookings/:bookingId", isLoggedIn, deleteBooking);
 
 module.exports = router;
