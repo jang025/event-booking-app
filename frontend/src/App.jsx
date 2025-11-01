@@ -38,8 +38,6 @@ const App = () => {
               />
             }
           />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage setToken={setToken} />} />
           <Route
             path="/event/:eventId"
             element={<EventDetailsPage setEventId={setEventId} />}
@@ -52,20 +50,27 @@ const App = () => {
             path="/book/:eventId/:bookingId"
             element={<ConfirmationPage />}
           />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/login"
+            element={<LoginPage setToken={setToken} setUserId={setUserId} />}
+          />
           <Route
             path="/users/:userId"
-            element={<ProfilePage token={token} />}
+            element={<ProfilePage token={token} userId={userId} />}
           />
           <Route
             path="/users/:userId/edit"
             element={
-              <EditProfilePage token={token} selectedEvent={selectedEvent} />
+              <EditProfilePage
+                token={token}
+                userId={userId}
+                selectedEvent={selectedEvent}
+              />
             }
           />
           <Route path="/book" element={<BookTicketPage />} />
           <Route path="/book/:bookingId" element={<ConfirmationPage />} />
-          <Route path="/users/:userId" element={<ProfilePage />} />
-          <Route path="/users/:userId/edit" element={<EditProfilePage />} />
         </Routes>
       </main>
     );
