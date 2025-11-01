@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ProfileBookingList from "../components/ProfileBookingList";
-import { show } from "../services/userService";
+import { remove, show } from "../services/userService";
 import { useNavigate } from "react-router";
 
 function ProfilePage({ userId, token }) {
@@ -25,6 +25,15 @@ function ProfilePage({ userId, token }) {
     };
     if (userId && token) fetchProfile();
   }, [userId, token, navigate]);
+
+  const handleDelete = async (bookingId) => {
+    //! delete the booking with the bookingId and the valid token
+    await remove(bookingId, token);
+    //! update with new state
+    setUpcomingBookings((updatedBookings) =>
+      updatedBookings.filter((bookings) => bookings._id !== bookingId)
+    );
+  };
   if (!user) return <p>Loading profile...</p>;
   return (
     <div>
@@ -40,7 +49,10 @@ function ProfilePage({ userId, token }) {
       {/* Upcoming Bookings */}
       <div>
         <h2>Upcoming Bookings</h2>
-        <ProfileBookingList bookings={upcomingBookings} token={token} />
+        <ProfileBookingList
+          bookings={upcomingBookings}
+          onDelete={handleDelete}
+        />
       </div>
       {/* Past Bookings  */}
       <div>

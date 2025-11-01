@@ -1,11 +1,19 @@
-function ProfileBookingCard({ _id, eventName, date, location, status, token }) {
+function ProfileBookingCard({
+  eventName,
+  date,
+  location,
+  onDelete,
+  bookingId,
+}) {
   return (
     <div>
       <p>{eventName}</p>
       <p>{date}</p>
       <p>{location}</p>
-      <p>{status}</p>
-      <button type="submit">Cancel Booking</button>
+      {/* Only show if onDelete function is provided */}
+      {onDelete && (
+        <button onClick={() => onDelete(bookingId)}>Cancel Booking</button>
+      )}
     </div>
   );
 }
