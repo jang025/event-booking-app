@@ -22,8 +22,8 @@ function SignupPage() {
     event.preventDefault();
     const response = await signup(user);
     console.log(response);
-    // navigate to profile page
-    navigate(`/users/${response.userId}`);
+    // navigate to event list page
+    navigate(`/eventlist`);
   };
 
   return (
