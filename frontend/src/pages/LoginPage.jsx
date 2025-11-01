@@ -22,9 +22,9 @@ function LoginPage({ setToken, setUserId }) {
     const response = await login(user);
     console.log(response);
     setToken(response.token);
-    setUserId(response.userId);
+    setUserId(response.user._id);
     // navigate to profile page
-    navigate(`/users/${response.userId}`);
+    navigate(`/users/${response.user._id}`);
   };
 
   return (

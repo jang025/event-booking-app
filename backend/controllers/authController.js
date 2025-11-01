@@ -60,7 +60,12 @@ const login = async (req, res) => {
     if (match) {
       const payload = { _id: user._id, username: user.username };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.status(200).json({ token });
+      const userData = {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+      };
+      res.status(200).json({ token, user: userData });
     } else {
       res.status(401).json({ message: "Wrong password" });
       return;
