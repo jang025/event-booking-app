@@ -64,9 +64,9 @@ export default function EventDetailsPage() {
     if (eventId) getData(eventId);
   }, [eventId]);
 
-  useEffect(() => {
-    if (eventId) getData(eventId);
-  }, [eventId]);
+//   useEffect(() => {
+//     if (eventId) getData(eventId);
+//   }, [eventId]);
     const handleChange = () => {
         navigate(`/book/${eventId}`);
     }
