@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function EventCarousel({ eventImages }) {
   console.log("eventImages:", eventImages);
+
   if (!Array.isArray(eventImages) || eventImages.length === 0) {
     return <p>No images available</p>;
   }
@@ -9,29 +10,11 @@ export default function EventCarousel({ eventImages }) {
   const [index, setIndex] = useState(0);
 
   const next = () => {
-    setIndex((i) => {
-      if (i + 1 === eventImages.length) {
-        //if we are at the last image
-        console.log("index now:", 0);
-        return 0; //show tthe first image
-      } else {
-        //if we are not on the last image
-        console.log("index now:", i + 1); //show the next image
-        return i + 1;
-      }
-    });
+    setIndex((i) => (i + 1 === eventImages.length ? 0 : i + 1));
   };
 
   const prev = () => {
-    setIndex((i) => {
-      if (i === 0) {
-        console.log("index now:", events.length - 1);
-        return eventImages.length - 1; //go to the last image if you are on first image and you click previous
-      } else {
-        console.log("index now:", i - 1);
-        return i - 1;
-      }
-    });
+    setIndex((i) => (i === 0 ? eventImages.length - 1 : i - 1));
   };
 
   return (
@@ -45,18 +28,4 @@ export default function EventCarousel({ eventImages }) {
       <button onClick={next}>next</button>
     </div>
   );
-import React, { useState } from "react";
-
-export default function EventCarousel(images = []) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  if (images.length === 0) {
-    return <p>No images available</p>;
-  }
-
-  const goToPrevious = () => {
-    setCurrentIndex(())
-  };
-
-  return <div></div>;
 }
