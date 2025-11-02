@@ -3,9 +3,9 @@ function NavBar() {
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/SignIn">SignIn</a></li>
-        <li><a href="/SignUp">SignUp</a></li>
-        <li><a href="/Profile">Profile </a></li>
+        <li><a href="/login">SignIn</a></li>
+        <li><a href="/signup">SignUp</a></li>
+        <li><a href="/users/:userId">Profile </a></li>
       </ul>
     </nav>
   )

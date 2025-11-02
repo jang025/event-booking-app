@@ -1,9 +1,11 @@
 import { useParams, Link } from "react-router";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function EventDetailsPage({ selectedEvent }) {
   const { eventId } = useParams();
   const [event, setEvent] = useState(selectedEvent || null);
+  const navigate = useNavigate();
 
   console.log("event id from url is:", eventId);
   console.log("props received in EventDetailsPage:", selectedEvent);
