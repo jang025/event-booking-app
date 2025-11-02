@@ -34,10 +34,10 @@ const showProfile = async (req, res) => {
     // get the current time down to milliseconds
     const today = new Date();
     const upcomingBookings = allBookings
-      .filter((booking) => new Date(booking.booking_date) > today)
+      .filter((booking) => new Date(booking.booking_date) <= today)
       .map(mapBooking);
     const pastBookings = allBookings
-      .filter((booking) => new Date(booking.booking_date) <= today)
+      .filter((booking) => new Date(booking.booking_date) > today)
       .map(mapBooking);
 
     res.status(200).json({
@@ -106,22 +106,22 @@ const deleteBooking = async (req, res) => {
       return res.status(404).json({ msg: "Booking not found" });
     }
 
-    // Remove booking ID
-    await User.findByIdAndUpdate(cancelled.userId, {
-      $pull: { bookings: cancelled._id },
-    });
+    // // Remove booking ID
+    // await User.findByIdAndUpdate(cancelled.userId, {
+    //   $pull: { bookings: cancelled._id },
+    // });
 
-    // Restore event tier capacities
-    const event = await Event.findById(cancelled.eventId);
-    if (event) {
-      cancelled.items.forEach((item) => {
-        const tier = event.tiers.find((t) => t.tierName === item.tierName);
-        if (tier) {
-          tier.capacity += item.quantity; // restore capacity
-        }
-      });
-      await event.save();
-    }
+    // // Restore event tier capacities
+    // const event = await Event.findById(cancelled.eventId);
+    // if (event) {
+    //   cancelled.items.forEach((item) => {
+    //     const tier = event.tiers.find((t) => t.tierName === item.tierName);
+    //     if (tier) {
+    //       tier.capacity += item.quantity; // restore capacity
+    //     }
+    //   });
+    //   await event.save();
+    // }
 
     res.status(200).json({
       msg: "Booking Cancelled successfully",
