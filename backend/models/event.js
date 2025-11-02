@@ -39,12 +39,6 @@ const eventSchema = new mongoose.Schema(
         capacity: { type: Number, required: true, min: 1 },
       },
     ],
-    status: {
-      type: String,
-      trim: true,
-      enum: ["ongoing", "cancelled", "completed"],
-      required: true,
-    },
   },
   { timestamps: true }
 );

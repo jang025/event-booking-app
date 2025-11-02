@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { eventData, bookTickets } from "../services/bookingService.js";
 
-export default function BookTickets({ eventId, onBooked }) {
+export default function BookTickets({ eventId, onBooked, userId }) {
   const [eventInfo, setEventInfo] = useState(null);
   const [count, setCount] = useState(1);
   const [types, setTypes] = useState([""]);
@@ -101,7 +101,7 @@ export default function BookTickets({ eventId, onBooked }) {
     }
 
     const body = {
-      userId: "69007f6b295829132d7285d4", //  replace with user id by props/lifted state
+      userId: userId, 
       eventId: eventInfo._id,
       items: items,
       status: "confirmed",
