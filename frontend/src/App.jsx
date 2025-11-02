@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-// import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar";
 // import HomePage from "./pages/HomePage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <main>
-      {/* <NavBar /> */}
+      <NavBar token = {token} userId = {userId} />
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/signup" element={<SignupPage />} />

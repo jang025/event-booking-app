@@ -1,14 +1,17 @@
-function NavBar() {
+import { Link } from "react-router-dom";
+
+function NavBar({ token, userId }) {
   return (
     <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/SignIn">SignIn</a></li>
-        <li><a href="/SignUp">SignUp</a></li>
-        <li><a href="/Profile">Profile </a></li>
+      <ul style={{ listStyle: "none", display: "flex", gap: "20px", margin: 0, padding: "10px" }}>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/eventlist">Events</Link></li>
+        {!token && <li><Link to="/login">SignIn</Link></li>}
+        {!token && <li><Link to="/signup">SignUp</Link></li>}
+        <li><Link to={`/users/${userId}`}>Profile</Link></li>
       </ul>
     </nav>
-  )
+  );
 }
 
 export default NavBar;
