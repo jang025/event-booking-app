@@ -21,6 +21,8 @@ function LoginPage({ setToken, setUserId }) {
     event.preventDefault();
     const response = await login(user);
     console.log(response);
+    localStorage.setItem("token", response.token);
+    localStorage.setItem("userId", response.user._id);
     setToken(response.token);
     setUserId(response.user._id);
     // navigate to profile page

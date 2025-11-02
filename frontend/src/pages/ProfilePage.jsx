@@ -3,8 +3,11 @@ import ProfileBookingList from "../components/ProfileBookingList";
 import { remove, show } from "../services/userService";
 import { Link, useNavigate } from "react-router";
 
-function ProfilePage({ userId, token }) {
+function ProfilePage() {
   const [user, setUser] = useState(null);
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+//   const userId = "6901d2ded07fbfae29c46f3f";
   // const [upcomingBookings, setUpcomingBookings] = useState([]);
   // const [pastBookings, setPastBookings] = useState([]);
   const navigate = useNavigate();
@@ -51,10 +54,10 @@ function ProfilePage({ userId, token }) {
   ]);
   useEffect(() => {
     // If no token or userId, redirect to login page (protected page)
-    if (!token || !userId) {
-      navigate("/login");
-      return;
-    }
+    // if (!token || !userId) {
+    //   navigate("/login");
+    //   return;
+    // }
     const fetchProfile = async () => {
       const data = await show(userId, token);
       console.log(data);

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-function NavBar({ userId }) {
+function NavBar() {
+    const userId = localStorage.getItem("userId");
   return (
     <nav>
       <ul style={{ listStyle: "none", display: "flex", gap: "20px", margin: 0, padding: "10px" }}>

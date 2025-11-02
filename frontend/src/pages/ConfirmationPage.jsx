@@ -10,10 +10,7 @@ export default function ConfirmationPage({ token, userId }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token || !userId) {
-      navigate("/login");
-      return;
-    }
+    
 
     const fetchData = async () => {
       try {
@@ -30,7 +27,7 @@ export default function ConfirmationPage({ token, userId }) {
     };
 
     fetchData();
-  }, [bookingId, token, userId, navigate]);
+  }, [bookingId,token]);
   const handleClick = () => navigate("/homepage");
 
   if (!booking) return <p>Loading confirmation…</p>;
