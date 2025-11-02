@@ -171,9 +171,31 @@ export default function BookTickets({ eventId, onBooked }) {
       )}
       <div style={{ margin: "1em 0" }}>
         <span>Tickets: </span>
-        <button onClick={() => changeCount(-1)}>-</button>
+        <button onClick={() => changeCount(-1)}
+            style={{
+                backgroundColor: "#e0e0e0",
+                color: "#333",
+                border: "1px solid #ccc",
+                borderRadius: "50%",
+                width: "30px",
+                height: "30px",
+                fontSize: "18px",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}>-</button>
         <span> {count} </span>
-        <button onClick={() => changeCount(1)}>+</button>
+        <button onClick={() => changeCount(1)}
+            style={{
+                backgroundColor: "#e0e0e0",
+                color: "#333",
+                border: "1px solid #ccc",
+                borderRadius: "50%",
+                width: "30px",
+                height: "30px",
+                fontSize: "18px",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}>+</button>
       </div>
 
       {Array.from({ length: count }).map((_, i) => (
@@ -194,7 +216,18 @@ export default function BookTickets({ eventId, onBooked }) {
         </div>
       ))}
 
-      <button onClick={handleBook}>Book Now</button>
+      <button onClick={handleBook}  style={{
+    backgroundColor: "#404040ff",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    padding: "10px 20px",
+    fontSize: "16px",
+    cursor: "pointer",
+    transition: "background 0.3s",
+  }}
+  onMouseOver={(e) => (e.target.style.backgroundColor = "#5a5959ff")}
+  onMouseOut={(e) => (e.target.style.backgroundColor = "#424242ff")}>Book Now</button>
     </section>
   );
 }

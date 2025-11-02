@@ -53,7 +53,19 @@ export default function ConfirmationPage() {
 
       <Confirmation booking={booking} />
 
-      <button onClick={handleClick}>HomePage</button>
+      <button onClick={handleClick }  style={{
+    backgroundColor: "#404040ff",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    padding: "10px 20px",
+    fontSize: "16px",
+    cursor: "pointer",
+    transition: "background 0.3s",
+  }}
+  onMouseOver={(e) => (e.target.style.backgroundColor = "#5a5959ff")}
+  onMouseOut={(e) => (e.target.style.backgroundColor = "#424242ff")}>HomePage</button>
+  
     </section>
   );
 }
