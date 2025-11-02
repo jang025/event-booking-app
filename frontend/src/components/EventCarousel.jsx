@@ -18,14 +18,34 @@ export default function EventCarousel({ eventImages }) {
   };
 
   return (
-    <div>
-      <button onClick={prev}>previous</button>
-      <img
-        src={eventImages[index]}
-        alt="event"
-        style={{ height: "380px", padding: "20px" }}
-      />
-      <button onClick={next}>next</button>
+    <div
+      style={{
+        width: "100%",
+        maxWidth: "600px",
+        display: "flex",
+        alignItems: "flex-end",
+        gap: "10px",
+      }}
+    >
+      <div>
+        <button onClick={prev}>previous</button>
+      </div>
+      <div>
+        <img
+          src={eventImages[index]}
+          alt="event"
+          style={{
+            width: "100%",
+            height: "300px",
+            padding: "20px",
+            objectFit: "cover",
+            borderRadius: "6px",
+          }}
+        />
+      </div>
+      <div>
+        <button onClick={next}>next</button>
+      </div>
     </div>
   );
 }
