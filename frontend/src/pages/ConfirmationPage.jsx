@@ -3,22 +3,25 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getBooking, eventData } from "../services/bookingService.js";
 import Confirmation from "../components/ConfirmationTicket.jsx";
 
-export default function ConfirmationPage() {
+export default function ConfirmationPage({ token, userId }) {
   const { bookingId } = useParams();
   const [booking, setBooking] = useState(null);
   const [event, setEvent] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!token || !userId) {
+      navigate("/login");
+      return;
+    }
+
     const fetchData = async () => {
       try {
-
-        const bookingData = await getBooking(bookingId);
+        const bookingData = await getBooking(bookingId, token);
         setBooking(bookingData);
 
-
         if (bookingData?.eventId) {
-          const eventDataResult = await eventData(bookingData.eventId);
+          const eventDataResult = await eventData(bookingData.eventId, token);
           setEvent(eventDataResult);
         }
       } catch (error) {
@@ -27,7 +30,7 @@ export default function ConfirmationPage() {
     };
 
     fetchData();
-  }, [bookingId]); 
+  }, [bookingId, token, userId, navigate]);
   const handleClick = () => navigate("/homepage");
 
   if (!booking) return <p>Loading confirmation…</p>;
