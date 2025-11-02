@@ -20,7 +20,7 @@ export default function BookTicketPage({ token, userId }) {
 
   return (
     <main>
-      <BookTickets eventId={eventId} onBooked={handleBooked} />
+      <BookTickets eventId={eventId} onBooked={handleBooked} userId = {userId}/>
     </main>
   );
 }

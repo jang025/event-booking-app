@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <main>
-      <NavBar />
+      <NavBar token = {token} userId = {userId} />
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/signup" element={<SignupPage />} />
