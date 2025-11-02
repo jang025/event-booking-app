@@ -10,7 +10,7 @@ export default function Eventcard({ event, setSelectedEvent }) {
     long_title,
     event_image,
     start_date_time,
-    end_date_time,
+    // end_date_time,
     venue,
     tiers,
     status,
