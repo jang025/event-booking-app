@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 export default function BookTicketPage() {
   const navigate = useNavigate();
-  const eventId = useParams().eventId;
+  const {eventId} = useParams();
   const handleBooked = (bookingId) => {
     console.log("Navigating to /book/" + bookingId);
     navigate(`/book/${eventId}/${bookingId}`);
