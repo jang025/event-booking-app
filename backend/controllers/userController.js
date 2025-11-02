@@ -16,18 +16,29 @@ const showProfile = async (req, res) => {
     if (!user) return res.status(404).json({ msg: "User not found" });
 
     // Find all the bookings from the specific user by ascending order
-    const allBookings = await Booking.find({ user: userId }).sort({
-      booking_date: 1,
-    });
+    const allBookings = await Booking.find({ userId: userId })
+      .sort({
+        booking_date: 1,
+      })
+      .populate("eventId");
 
+    const mapBooking = (booking) => ({
+      _id: booking._id,
+      eventName:
+        booking.eventId?.title || booking.eventId?.long_title || "Event",
+      location: booking.eventId?.location || "Unknown",
+      booking_date: booking.booking_date,
+      status: booking.status,
+      items: booking.items,
+    });
     // get the current time down to milliseconds
     const today = new Date();
-    const upcomingBookings = allBookings.filter(
-      (booking) => new Date(booking.booking_date) > today
-    );
-    const pastBookings = allBookings.filter(
-      (booking) => new Date(booking.booking_date) <= today
-    );
+    const upcomingBookings = allBookings
+      .filter((booking) => new Date(booking.booking_date) > today)
+      .map(mapBooking);
+    const pastBookings = allBookings
+      .filter((booking) => new Date(booking.booking_date) <= today)
+      .map(mapBooking);
 
     res.status(200).json({
       msg: "User profile with bookings",
