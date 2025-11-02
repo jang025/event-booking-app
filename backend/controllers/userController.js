@@ -133,8 +133,33 @@ const deleteBooking = async (req, res) => {
   }
 };
 
+//! delete user
+const deleteUser = async (req, res) => {
+  const { userId } = req.params;
+  const currentUser = req.user;
+
+  try {
+    if (userId !== String(currentUser._id)) {
+      res.status(403).json({ msg: "Not authorised to delete profile" });
+      return;
+    }
+
+    // Delete userId        
+    await User.findByIdAndDelete(userId);
+
+    //delete all bookings associated with the user
+    await Booking.deleteMany({ userId: userId });
+
+    res.status(200).json({ msg: "User and associated bookings deleted" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Error deleting user" });
+  }
+}
+
 router.get("/:userId", isLoggedIn, showProfile);
 router.put("/:userId/edit", isLoggedIn, updateProfile);
 router.delete("/bookings/:bookingId", isLoggedIn, deleteBooking);
+router.delete("/:userId", isLoggedIn, deleteUser);
 
 module.exports = router;

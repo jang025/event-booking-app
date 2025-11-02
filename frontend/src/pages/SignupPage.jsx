@@ -23,7 +23,7 @@ function SignupPage() {
     const response = await signup(user);
     console.log(response);
     // navigate to event list page
-    navigate(`/eventlist`);
+    navigate(`/`);
   };
 
   return (

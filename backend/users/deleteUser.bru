@@ -1,0 +1,19 @@
+meta {
+  name: deleteUser
+  type: http
+  seq: 1
+}
+
+delete {
+  url: http://localhost:3000/users/:userId
+  body: none
+  auth: none
+}
+
+params:path {
+  userId: 6907c88ce0988132f3607055
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTA3Yzg4Y2UwOTg4MTMyZjM2MDcwNTUiLCJ1c2VybmFtZSI6IlZzaHZhMiIsImlhdCI6MTc2MjExNzgxMX0.5yTxl2aRToLJS363hLC3cmQKIxNZ64dSvnKIAdv_ISc
+}

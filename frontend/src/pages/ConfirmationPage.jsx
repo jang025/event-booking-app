@@ -36,7 +36,7 @@ export default function ConfirmationPage() {
     fetchData();
   }, [bookingId, token, userId, navigate]);
   
-  const handleClick = () => navigate("/homepage");
+  const handleClick = () => navigate("/");
 
   if (!booking) return <p>Loading confirmation…</p>;
 

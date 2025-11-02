@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ProfileBookingList from "../components/ProfileBookingList";
-import { remove, show } from "../services/userService";
+import { remove, show , deleteUser} from "../services/userService";
 import { Link, useNavigate } from "react-router";
 
 function ProfilePage() {
@@ -43,10 +43,17 @@ function ProfilePage() {
     localStorage.removeItem("userId");
     navigate("/login");
   }
+  const handleDeleteUser = async () => {
+    await deleteUser(userId, token);
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    navigate("/signup");
+  }
   return (
     <div>
       <h1>My Profile</h1>
       <button onClick={handleSignOut}>Signout</button>
+      <button onClick={handleDeleteUser}>Delete Account</button>
       {/* profile details */}
 
       <div>
