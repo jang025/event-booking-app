@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProfileBookingList from "../components/ProfileBookingList";
 import { remove, show } from "../services/userService";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function ProfilePage({ userId, token }) {
   const [user, setUser] = useState(null);
@@ -43,7 +43,9 @@ function ProfilePage({ userId, token }) {
       <div>
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
-        <button type="submit">Edit Profile</button>
+        <Link to={`/users/${userId}/edit`}>
+          <button type="button">Edit Profile</button>
+        </Link>
       </div>
 
       {/* Upcoming Bookings */}

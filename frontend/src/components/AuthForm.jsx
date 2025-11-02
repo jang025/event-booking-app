@@ -23,7 +23,7 @@ function AuthForm({
         />
         <label htmlFor="password">Password: </label>
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
           placeholder="Enter your password"
@@ -35,7 +35,7 @@ function AuthForm({
           <>
             <label htmlFor="confirmPassword">Confirm Password: </label>
             <input
-              type="text"
+              type="password"
               id="confirmPassword"
               name="confirmPassword"
               placeholder="Confirm Password"
