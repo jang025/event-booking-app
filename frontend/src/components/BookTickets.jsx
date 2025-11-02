@@ -2,11 +2,10 @@
 import { useEffect, useState } from "react";
 import { eventData, bookTickets } from "../services/bookingService.js";
 
-export default function BookTickets({ eventId, onBooked }) {
+export default function BookTickets({ eventId, onBooked, userId }) {
   const [eventInfo, setEventInfo] = useState(null);
   const [count, setCount] = useState(1);
   const [types, setTypes] = useState([""]);
-  const userId = localStorage.getItem("userId");
   useEffect(() => {
     async function loadEvent() {
       try {

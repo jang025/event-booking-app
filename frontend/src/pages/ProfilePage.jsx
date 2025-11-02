@@ -54,10 +54,10 @@ function ProfilePage() {
   ]);
   useEffect(() => {
     // If no token or userId, redirect to login page (protected page)
-    // if (!token || !userId) {
-    //   navigate("/login");
-    //   return;
-    // }
+    if (!token || !userId) {
+      navigate("/login");
+      return;
+    }
     const fetchProfile = async () => {
       const data = await show(userId, token);
       console.log(data);
@@ -79,9 +79,15 @@ function ProfilePage() {
     );
   };
   if (!user) return <p>Loading profile...</p>;
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    navigate("/login");
+  }
   return (
     <div>
       <h1>My Profile</h1>
+      <button onClick={handleSignOut}>Signout</button>
       {/* profile details */}
 
       <div>
