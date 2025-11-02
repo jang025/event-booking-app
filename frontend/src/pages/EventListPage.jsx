@@ -3,10 +3,9 @@ import React from "react";
 import Eventcard from "../components/Eventcard.jsx";
 import { useState, useEffect } from "react";
 
-export default function EventListPage({ setEventId }) {
-  const [events, setEvents] = useState([]);
+export default function EventListPage({ events, setEventId }) {
+  // const [events, setEvents] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("All");
-  const [filteredEvents, setFilteredEvents] = useState(events || []);
   const [selectedSort, setSelectedSort] = useState("date");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -16,7 +15,7 @@ export default function EventListPage({ setEventId }) {
     "Arts & Culture",
     "Food & Drink",
     "Business & Networking",
-    "Lifestyle",
+    "LifeStyle",
     "Health",
     "Community",
   ];
@@ -29,35 +28,16 @@ export default function EventListPage({ setEventId }) {
       .then((res) => res.json())
       .then((data) => setEvents(data))
       .catch((err) => console.error("Error fetching events:", err));
-  }, []);
-
-  //when selectedFilter or items change, reassess what to show
-  useEffect(() => {
-    if (selectedFilter === "All") {
-      setFilteredEvents(events);
-    } else {
-      const filtered = events.filter(
-        (event) => event.category === selectedFilter
-      );
-      setFilteredEvents(filtered);
-    }
-  }, [selectedFilter, events]);
+  }, [selectedSort, searchTerm, selectedFilter]);
 
   function handleSortChange(value) {
     setSelectedSort(value);
   }
 
   function handleSearch() {
-    const term = searchTerm.toLowerCase();
-
-    const filtered = events.filter(
-      (event) =>
-        event.long_title.toLowerCase().includes(term) ||
-        event.short_title.toLowerCase().includes(term) ||
-        event.venue.toLowerCase().includes(term)
-    );
-
-    setFilteredEvents(filtered);
+    // intentionally empty
+    // searchTerm is already in useEffect dependency list,
+    // so typing or pressing Enter will trigger a backend fetch
   }
 
   const handleFilterButtonClick = (selectedCategory) => {
@@ -137,9 +117,9 @@ export default function EventListPage({ setEventId }) {
               <label>Sort by: </label>
               <select onChange={(e) => handleSortChange(e.target.value)}>
                 {" "}
-                <option>Date</option>
-                <option>Price: Low → High</option>
-                <option>Price: High → Low</option>
+                <option value="date">Date</option>
+                {/* <option value="priceLow">Price: Low → High</option>
+                <option value="priceHigh">Price: High → Low</option> */}
               </select>
             </div>
           </div>
@@ -160,7 +140,7 @@ export default function EventListPage({ setEventId }) {
           width: "100%",
         }}
       >
-        {filteredEvents.map((event) => (
+        {events.map((event) => (
           <Eventcard key={event._id} setEventId={setEventId} event={event} />
         ))}
       </div>

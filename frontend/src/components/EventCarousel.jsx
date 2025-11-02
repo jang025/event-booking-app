@@ -17,6 +17,8 @@ export default function EventCarousel({ eventImages }) {
     setIndex((i) => (i === 0 ? eventImages.length - 1 : i - 1));
   };
 
+  const showButtons = eventImages.length > 1;
+
   return (
     <div
       style={{
@@ -24,12 +26,11 @@ export default function EventCarousel({ eventImages }) {
         maxWidth: "600px",
         display: "flex",
         alignItems: "flex-end",
-        gap: "10px",
+        gap: showButtons ? "10px" : "0",
       }}
     >
-      <div>
-        <button onClick={prev}>previous</button>
-      </div>
+      <div>{showButtons && <button onClick={prev}>prev</button>}</div>
+
       <div>
         <img
           src={eventImages[index]}
@@ -37,14 +38,17 @@ export default function EventCarousel({ eventImages }) {
           style={{
             width: "100%",
             height: "300px",
-            margin: "20px",
             objectFit: "cover",
             borderRadius: "10px",
+            display: "block",
           }}
         />
       </div>
       <div>
-        <button onClick={next}>next</button>
+        <p>
+          {index + 1}/{eventImages.length}
+        </p>
+        {showButtons && <button onClick={next}>next</button>}
       </div>
     </div>
   );

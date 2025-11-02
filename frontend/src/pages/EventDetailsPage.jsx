@@ -4,7 +4,6 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import EventCarousel from "../components/EventCarousel";
 
-
 export default function EventDetailsPage({ selectedEvent }) {
   const { eventId } = useParams();
   const [event, setEvent] = useState(selectedEvent || null);
@@ -79,36 +78,41 @@ export default function EventDetailsPage({ selectedEvent }) {
     })}`;
   }
 
-  // async function getData(id) {
-  //   const url = `http://localhost:3000/api/${id}`;
-  //   try {
-  //     const response = await fetch(url);
-  //     if (!response.ok) {
-  //       throw new Error(`Response status: ${response.status}`);
-  //     }
-
-  //     const result = await response.json();
-  //     console.log(result);
-  //     setEvent(result);
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // }
-
-  //   useEffect(() => {
-  //     if (eventId) getData(eventId);
-  //   }, [eventId]);
-
   const handleChange = () => {
     navigate(`/book/${eventId}`);
   };
   return (
-    <div>
-      {/* search bar */}
+    <div style={{ width: "500px", margin: "20px 0 0 20px" }}>
       <div>
-        <input type="text" placeholder="Search events" />
-        <button>🔍</button>
+        <Link to="/eventlist">← Back to Event List</Link>
+        {/* ...rest of details page */}
       </div>
+      {/* <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          marginBottom: "15px",
+          justifyContent: "center",
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Search events"
+          onFocus={() => navigate("/eventlist")}
+          style={{
+            maxWidth: "350px",
+            minWidth: "150px",
+            width: "100%",
+            height: "38px",
+          }}
+        />
+        <button
+          style={{ height: "38px", boxSizing: "border-box" }}
+          onClick={() => navigate("/eventlist")}
+        >
+          🔍
+        </button>
+      </div> */}
 
       {/* image */}
       <div>
@@ -162,7 +166,20 @@ export default function EventDetailsPage({ selectedEvent }) {
           <h3>Details</h3>
           <p>{event.event_long_description}</p>
 
-          <button onClick={handleChange}>Get Tickets</button>
+          <button
+            onClick={handleChange}
+            style={{
+              display: "block",
+              marginLeft: "auto",
+              backgroundColor: "black",
+              color: "white",
+              padding: "8px 16px",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+          >
+            Get Tickets
+          </button>
           <hr />
         </div>
       )}

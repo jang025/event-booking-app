@@ -12,6 +12,7 @@ import EditProfilePage from "./pages/EditProfilePage.jsx";
 import EventDetailsPage from "./pages/EventDetailsPage.jsx";
 
 import { useState } from "react";
+import HomePage from "./pages/HomePage.jsx";
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -25,9 +26,10 @@ const App = () => {
 
   return (
     <main>
-      <NavBar  userId = {userId} />
+      <NavBar userId={userId} />
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
+        <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route
           path="/login"

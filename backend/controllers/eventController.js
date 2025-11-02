@@ -9,6 +9,7 @@ router.get("/eventlist", async (req, res) => {
     const { category, search, sort } = req.query;
 
     let filter = {};
+    let sortOption = {};
 
     if (category && category !== "All") {
       //if filter category chosen is not 'All",
@@ -27,9 +28,9 @@ router.get("/eventlist", async (req, res) => {
     if (sort === "date") {
       sortOption = { start_date_time: 1 }; // ascending by date
     } else if (sort === "priceLow") {
-      sortOption = { "tiers.price": 1 }; // ascending by price
+      sortOption = { "tiers.unitPrice": 1 }; // ascending by price
     } else if (sort === "priceHigh") {
-      sortOption = { "tiers.price": -1 }; // descending by price
+      sortOption = { "tiers.unitPrice": -1 }; // descending by price
     }
 
     const events = await Event.find(filter).sort(sortOption);
