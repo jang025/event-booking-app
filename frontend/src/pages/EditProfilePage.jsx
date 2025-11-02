@@ -1,7 +1,16 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import EditForm from "../components/EditForm";
+import { useEffect } from "react";
 
 function EditProfilePage({ userId, token }) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // ✅ Redirect to login if not authenticated
+    if (!token || !userId) {
+      navigate("/login");
+    }
+  }, [token, userId, navigate]);
   return (
     <div>
       <h1>Edit Profile</h1>

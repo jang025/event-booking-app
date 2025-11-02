@@ -2,10 +2,17 @@
 import { useNavigate } from "react-router-dom";
 import BookTickets from "../components/BookTickets";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-export default function BookTicketPage() {
+export default function BookTicketPage({ token, userId }) {
   const navigate = useNavigate();
-  const {eventId} = useParams();
+  const { eventId } = useParams();
+  useEffect(() => {
+    // Protect this page
+    if (!token || !userId) {
+      navigate("/login");
+    }
+  }, [token, userId, navigate]);
   const handleBooked = (bookingId) => {
     console.log("Navigating to /book/" + bookingId);
     navigate(`/book/${eventId}/${bookingId}`);
