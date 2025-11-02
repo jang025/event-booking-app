@@ -57,7 +57,7 @@ export default function Eventcard({ event, setSelectedEvent }) {
           {/* image container */}
           <div style={{ flex: "0 0 250px" }}>
             <img
-              src={event_image}
+              src={event_image[0]}
               alt={short_title}
               style={{
                 width: "100%",

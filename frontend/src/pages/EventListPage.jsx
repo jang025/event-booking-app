@@ -23,7 +23,9 @@ export default function EventListPage({ setEventId }) {
 
   //to fetch events from backend
   useEffect(() => {
-    fetch("http://localhost:3000/api/eventlist")
+    fetch(
+      "`http://localhost:3000/api/eventlist?category=${selectedFilter}&search=${searchTerm}&sort=${selectedSort}`"
+    )
       .then((res) => res.json())
       .then((data) => setEvents(data))
       .catch((err) => console.error("Error fetching events:", err));

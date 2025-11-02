@@ -37,9 +37,9 @@ export default function EventCarousel({ eventImages }) {
           style={{
             width: "100%",
             height: "300px",
-            padding: "20px",
+            margin: "20px",
             objectFit: "cover",
-            borderRadius: "6px",
+            borderRadius: "10px",
           }}
         />
       </div>
