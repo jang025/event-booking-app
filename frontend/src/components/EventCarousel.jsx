@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import React, { useState, useEffect } from "react";
 
 export default function EventCarousel({ eventImages }) {
@@ -46,7 +45,6 @@ export default function EventCarousel({ eventImages }) {
       <button onClick={next}>next</button>
     </div>
   );
-=======
 import React, { useState } from "react";
 
 export default function EventCarousel(images = []) {
@@ -61,5 +59,4 @@ export default function EventCarousel(images = []) {
   };
 
   return <div></div>;
->>>>>>> Stashed changes
 }
