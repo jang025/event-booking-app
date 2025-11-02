@@ -21,7 +21,9 @@ export async function bookTickets(bookingData) {
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json" },
       body: JSON.stringify(bookingData),
     });
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
@@ -37,7 +39,9 @@ export async function bookTickets(bookingData) {
 export async function getBooking(bookingId) {
   const url = `${API_BASE}/book/${bookingId}`;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+        headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` },
+    });
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
     const result = await response.json();
     console.log(result);

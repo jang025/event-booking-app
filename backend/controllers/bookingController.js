@@ -3,6 +3,7 @@ const router = express.Router();
 const Booking = require("../models/Booking");
 const Event = require("../models/Event");
 const User = require("../models/User");
+const { isLoggedIn } = require("../middleware/isLoggedIn");
 
 // Show a booking
 const show = async (req, res) => {
@@ -19,8 +20,8 @@ const show = async (req, res) => {
 // Create a new booking
 const create = async (req, res) => {
   try {
-    const { userId, eventId, items, status, booking_date } = req.body;
-
+    const {eventId, items, status, booking_date } = req.body;
+    const userId = req.user._id;
     // Create booking
     const newBooking = await Booking.create({
       userId,
@@ -52,8 +53,8 @@ const showevent = async (req, res) => {
 };
 
 // Routes
-router.post("/", create);
-router.get("/:bookingId", show);
+router.post("/", isLoggedIn ,create);
+router.get("/:bookingId", isLoggedIn , show);
 router.get("/event/:eventId", showevent);
 
 module.exports = router;
