@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import EventCarousel from "../components/EventCarousel";
 
+
 export default function EventDetailsPage({ selectedEvent }) {
   const { eventId } = useParams();
   const [event, setEvent] = useState(selectedEvent || null);
