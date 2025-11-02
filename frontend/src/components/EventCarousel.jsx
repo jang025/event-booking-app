@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState, useEffect } from "react";
 
 export default function EventCarousel({ eventImages }) {
@@ -45,4 +46,20 @@ export default function EventCarousel({ eventImages }) {
       <button onClick={next}>next</button>
     </div>
   );
+=======
+import React, { useState } from "react";
+
+export default function EventCarousel(images = []) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  if (images.length === 0) {
+    return <p>No images available</p>;
+  }
+
+  const goToPrevious = () => {
+    setCurrentIndex(())
+  };
+
+  return <div></div>;
+>>>>>>> Stashed changes
 }
