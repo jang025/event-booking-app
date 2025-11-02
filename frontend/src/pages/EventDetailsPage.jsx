@@ -1,12 +1,17 @@
-import { useParams, Link } from "react-router";
+//useEffect again but only to show details of thate vent only
+
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import EventCarousel from "../components/EventCarousel";
 
 export default function EventDetailsPage({ selectedEvent }) {
   const { eventId } = useParams();
   const [event, setEvent] = useState(selectedEvent || null);
+  const navigate = useNavigate();
 
   console.log("event id from url is:", eventId);
   console.log("props received in EventDetailsPage:", selectedEvent);
+  console.log("event", { event });
 
   // async function getData(id) {
   //   const url = `http://localhost:3000/api/${id}`;
@@ -33,6 +38,7 @@ export default function EventDetailsPage({ selectedEvent }) {
         .catch((err) => console.error(err));
     }
   }, [eventId, selectedEvent]);
+
   if (!event) return <p>Loading event details...</p>;
   const start = new Date(event.start_date_time);
   const end = new Date(event.end_date_time);
@@ -72,33 +78,29 @@ export default function EventDetailsPage({ selectedEvent }) {
     })}`;
   }
 
-  async function getData(id) {
-    const url = `http://localhost:3000/api/${id}`;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
+  // async function getData(id) {
+  //   const url = `http://localhost:3000/api/${id}`;
+  //   try {
+  //     const response = await fetch(url);
+  //     if (!response.ok) {
+  //       throw new Error(`Response status: ${response.status}`);
+  //     }
 
-      const result = await response.json();
-      console.log(result);
-      setEvent(result);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
+  //     const result = await response.json();
+  //     console.log(result);
+  //     setEvent(result);
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // }
 
-  useEffect(() => {
-    console.log("eventid:", eventId);
-    if (eventId) getData(eventId);
-  }, [eventId]);
+  //   useEffect(() => {
+  //     if (eventId) getData(eventId);
+  //   }, [eventId]);
 
-//   useEffect(() => {
-//     if (eventId) getData(eventId);
-//   }, [eventId]);
-    const handleChange = () => {
-        navigate(`/book/${eventId}`);
-    }
+  const handleChange = () => {
+    navigate(`/book/${eventId}`);
+  };
   return (
     <div>
       {/* search bar */}
@@ -109,14 +111,9 @@ export default function EventDetailsPage({ selectedEvent }) {
 
       {/* image */}
       <div>
-        {event?.event_image && (
-          <img
-            src={event.event_image}
-            alt={event.long_title}
-            style={{ width: "100%", maxWidth: "600px", borderRadius: "8px" }}
-          />
+        {event.event_image && event.event_image.length > 0 && (
+          <EventCarousel eventImages={event.event_image} />
         )}
-        <button>→</button>
       </div>
 
       {/* event details */}
