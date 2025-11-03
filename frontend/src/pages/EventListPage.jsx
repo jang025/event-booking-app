@@ -3,8 +3,8 @@ import React from "react";
 import Eventcard from "../components/Eventcard.jsx";
 import { useState, useEffect } from "react";
 
-export default function EventListPage({ events, setEventId }) {
-  // const [events, setEvents] = useState([]);
+export default function EventListPage({ setEventId }) {
+  const [events, setEvents] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [selectedSort, setSelectedSort] = useState("date");
   const [searchTerm, setSearchTerm] = useState("");
